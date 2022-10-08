@@ -1,18 +1,4 @@
 
-//prueba funcion iniciarSesion()
-pruebaUsuario = new LinkedList();
-pruebaContra = new LinkedList();
-pruebaUsuario.append("hola123");
-pruebaContra.append("holaaa");
-pruebaUsuario.append("hola1232");
-pruebaContra.append("holaaa2");
-pruebaUsuario.append("hola1233");
-pruebaContra.append("holaaa3");
-pruebaUsuario.append("hola1234");
-pruebaContra.append("holaaa4");
-
-usuario = "holaa1232";
-contraseña = "holaaa2";
 
 function iniciarSesion(listaUsuarios, listaContraseña, usuario, contraseña) {
   id = listaUsuarios.search(usuario);
@@ -25,8 +11,6 @@ function iniciarSesion(listaUsuarios, listaContraseña, usuario, contraseña) {
     return false;
   }
 }
-//prueba
-iniciarSesion(pruebaUsuario, pruebaContra, usuario, contraseña);
 
 colaMiniEventos = new Queue();
 
