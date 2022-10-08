@@ -1,3 +1,5 @@
+//El codigo vuelve a utilizar Indexador simulando la base de datos, esta inicializado con datos de prueba nada mas pero la idea seria que el
+//indexador (base de datos de los usuarios) se traspase de antes para evitar tener que inicilizar en cada metodo el indexador
 class Usuario {
     constructor(usuario, correo, password, nombre, apellido, edad, listaHobbies) {
         this.usuario = usuario;
@@ -13,10 +15,10 @@ class Usuario {
 class Indexador {
     constructor() {
         // Cada una va en el index que indica ID
-        this.usuarios = ["jcarrenoar"]; // aqui van los nombres de usuario
-        this.correos = ["jcarrenoar@unal.edu.co"]; // aqui van los correos
+        this.usuarios = ["jaca"]; // aqui van los nombres de usuario
+        this.correos = ["blablabla@unal.edu.co"]; // aqui van los correos
         this.passwords = ["12345"]; // aqui van las contraseñas
-        this.userObjects = [new Usuario("jcarrenoar", "jcarrenoar@unal.edu.co", "12345", "Juan", "Carreño", 4568797, ["Basketball", "Tenis", "LoL"])]; // aqui van los objetos de cada usuario
+        this.userObjects = [new Usuario("jaca", "blablabla@unal.edu.co", "12345", "Juan", "Andres", 32, ["Dormir", "Comer", "LoL"])]; // aqui van los objetos de cada usuario
     }
 
     find(user) {
@@ -48,7 +50,6 @@ function consulta(user){
         var apellido = usuario.apellido;
         var username = usuario.usuario;
         var email = usuario.correo;
-        var password = usuario.password;
         var listaHobbies = usuario.listaHobbies;
 
         document.getElementById("inputName").value = nombre;    
@@ -66,7 +67,7 @@ function consulta(user){
 
 
 
-function capturar(user){
+function editar(user){
     nombre = document.getElementById("inputName").value;
     apellido = document.getElementById("inputLastName").value;
     email = document.getElementById("inputEmail").value;
@@ -115,12 +116,12 @@ function capturar(user){
         
     }
 
+    //Aqui se vuelve a imprimir para verificar que se modifico el indexador
     if(usuario != null){  
         var nombre = usuario.nombre;
         var apellido = usuario.apellido;
         var username = usuario.usuario;
         var email = usuario.correo;
-        var password = usuario.password;
         var listaHobbies = usuario.listaHobbies;
 
         document.getElementById("inputName").value = nombre;    
@@ -134,4 +135,40 @@ function capturar(user){
         alert("Error al consultar los registros. ");
     }
 
+}
+
+function eliminar(user){
+    const index = new Indexador;
+    var indice = index.findIndex(user);
+    var usuario = index.find(user);
+
+    var password = prompt("Ingrese la contrasena para confirmar.");
+    if(password == usuario.password){
+        index.usuarios.splice(indice,1);
+        index.passwords.splice(indice,1);
+        index.correos.splice(indice,1);
+        index.userObjects.splice(indice,1);
+    }else{
+        alert("Contrasena es incorrecta, no se puede eliminar el usuario. ");
+    }
+    
+    //Aqui se vuelve a imprimir para verificar que se elimino el usuario
+    usuario = index.find(user);
+    if(usuario != null){  
+        var nombre = usuario.nombre;
+        var apellido = usuario.apellido;
+        var username = usuario.usuario;
+        var email = usuario.correo;
+        var listaHobbies = usuario.listaHobbies;
+
+        document.getElementById("inputName").value = nombre;    
+        document.getElementById("inputLastName").value = apellido;
+        document.getElementById("inputUsername").value = username;
+        document.getElementById("inputEmail").value = email;
+        document.getElementById("inputPassword").value = "Password";
+        document.getElementById("inputHobbies").value = listaHobbies;
+        document.getElementById("inputNewPassword").value = "New Password";
+    }else{
+        alert("Error al consultar los registros. ");
+    }
 }
