@@ -36,7 +36,7 @@ class Usuario {
         this.edad = edad;
         this.listaHobbies = listaHobbies;
 
-    }
+    }       
 
     crearUsuario(indexadorAct, usuario, correo, password, nombre, apellido, edad, listaHobbies) {
 
@@ -47,7 +47,7 @@ class Usuario {
         
         //Creando el objeto del usuario y poniendolo en el lugar respectivo de indexadorAct
         nuevoUsuario = new Usuario(usuario, correo, password, nombre, apellido, edad, listaHobbies);
-        indexadorAct.userObjects = nuevoUsuario;
+        indexadorAct.userObjects.push(nuevoUsuario);
 
     }
 
