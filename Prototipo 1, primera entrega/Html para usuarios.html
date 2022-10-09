@@ -7,27 +7,35 @@
 </head>    
 <body>
     <form>
+
         <script type="text/javascript" src="data.js"></script>
         
-        <label type="text" name="name" id="etiquetaName">Name(s): </label>
-        <input type="text" name="name" id="inputName" size="35"><br>
-        <label type="text" name="lastname" id="etiquetaLastname">Last Name(s): </label>
-        <input type="text" name="lastName" id="inputLastName" size="35"><br>
-        <label type="text" name="username" id="etiquetaUsername">Username : </label>
+        <label type="text" name="username" id="etiquetaUsername">Usuario : </label>
         <input type="text" name="username" id="inputUsername" size="35"><br>
-        <label type="text" name="email=" id="etiquetaEmail">Email : </label>
-        <input type="text" name="email" id="inputEmail" size="35"><br>
-        <label type="text" name="hobbies=" id="etiquetaHobbies">Hobbies : </label>
-        <input type="text" name="hobbies" id="inputHobbies" size="35"><br>
+        
         <label type="text" name="password" id="etiquetaPassword">Password: </label>
         <input type="text" name="password" id="inputPassword" size="35"><br>
+
+        <label type="text" name="name" id="etiquetaName">Nombre (s): </label>
+        <input type="text" name="name" id="inputName" size="35"><br>
+
+        <label type="text" name="lastname" id="etiquetaLastname">Apellido (s): </label>
+        <input type="text" name="lastName" id="inputLastName" size="35"><br>
+
+        <label type="text" name="email=" id="etiquetaEmail">Email : </label>
+        <input type="text" name="email" id="inputEmail" size="35"><br>
+
+        <label type="text" name="hobbies=" id="etiquetaHobbies">Hobbies : </label>
+        <input type="text" name="hobbies" id="inputHobbies" size="35"><br>
+        
         <label type="text" name="newPassword" id="etiquetaNewPassword">New Password: </label>
         <input type="text" name="newPassword" id= "inputNewPassword" size="35"><br>
-        
-        <!--"aquui jaca hacer referencia a nombre de un usuario solo utilizado para realizar las pruebas iniciales"-->
-        <button type ="button" onclick="editar('jaca')">Editar</button><br>
-        <button type ="button" onclick="consulta('jaca')">Consulta</button><br>
-        <button type ="button" onclick="eliminar('jaca')">Eliminar</button>
+
+        <button type ="button" onclick="creacion()">Crear</button>
+        <button type ="button" onclick="editar()">Editar</button><br>
+        <button type ="button" onclick="consultaPorUser()">Consulta</button><br>
+        <button type ="button" onclick="eliminarPorUser()">Eliminar</button>
+
     </form>
 
 <br>

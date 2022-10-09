@@ -3,12 +3,14 @@ colaMiniEventos = new Queue();
 
 //Metodo de creacion de minieventos
 function crearMiniEvento(nombre, hora, tematica) {
-  miniEventos = new Stack();
+
+  miniEvento = new Stack();
   miniEvento.push(nombre);
   miniEvento.push(hora);
   miniEvento.push(tematica);
 
   colaMiniEventos.enqueue(miniEvento);
+  
 }
 
 
@@ -42,6 +44,7 @@ function eliminarMiniEvento(){
 
 //Implementacion de estructuras
 class Stack {
+
     constructor() {
       this.stack = {};
       this.count = 0;
