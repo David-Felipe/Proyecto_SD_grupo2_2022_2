@@ -363,6 +363,13 @@ function eliminarPorUser(){
     
     let node = bdUsuarios.searchUser(username);
     let password = prompt("Ingrese la contrasena para confirmar.");
+    
+    if (node == null) {
+
+        alert("El usuario no existe");
+        return;
+
+    }
 
     if (password == node.password) {
 
