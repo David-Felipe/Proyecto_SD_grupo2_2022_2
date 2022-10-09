@@ -49,7 +49,7 @@ class LinkedList {
 
         } else {
 
-            node = new Node(user,password,objects);
+            let node = new Node(user,password,objects);
             this.tail.setNext(node);
             this.tail = node;
             this.length++;
@@ -68,7 +68,7 @@ class LinkedList {
 
         } else {
 
-            node = new Node(user,password,objects);
+            let node = new Node(user,password,objects);
             node.setNext(this.head);
             this.head = node;
             this.length++;
@@ -123,7 +123,7 @@ class LinkedList {
 
             } else {
 
-                currentNode = this.head;
+                let currentNode = this.head;
 
                 do{
 
@@ -172,8 +172,8 @@ class LinkedList {
 
         } else {
 
-            currentNode = this.head;
-            before = null;
+            let currentNode = this.head;
+            let before = null;
 
             do{
 
@@ -193,7 +193,6 @@ class LinkedList {
 
 // Esta lista enlazada funciona como base de datos de todos los usuarios
  var bdUsuarios = new LinkedList;      // aqui una lista enlazada que tiene usuario,password y un objeto usuario para los demas datos del mismo
-
 
 // Usen el metodo crearUsuario() cuando creen un usuario
 class Usuario {
@@ -218,7 +217,7 @@ class Usuario {
 function crearUsuario(usuario, password, nombre, apellido, email, listaHobbies) {
 
     //Pasando los verificables al indexador
-    user = new Usuario(usuario, email, password, nombre, apellido, listaHobbies);
+    let user = new Usuario(usuario, email, password, nombre, apellido, listaHobbies);
     bdUsuarios.append(usuario, password, user);
     alert("El usuario fue creado");
 
@@ -274,16 +273,16 @@ function consultaPorUser(){
 
     let inUserName = document.getElementById("inputUsername").value;
 
-    var node = bdUsuarios.searchUser(inUserName);  
-    var usuario = node.userObjects;
+    let node = bdUsuarios.searchUser(inUserName);  
+    let usuario = node.userObjects;
 
     if(usuario != null){  
 
-        var nombre = usuario.nombre;
-        var apellido = usuario.apellido;
-        var username = usuario.usuario;
-        var email = usuario.correo;
-        var listaHobbies = usuario.listaHobbies;
+        let nombre = usuario.nombre;
+        let apellido = usuario.apellido;
+        let username = usuario.usuario;
+        let email = usuario.correo;
+        let listaHobbies = usuario.listaHobbies;
 
         document.getElementById("inputName").value = nombre;    
         document.getElementById("inputLastName").value = apellido;
@@ -312,8 +311,8 @@ function editar(){
     let password  = document.getElementById("inputPassword").value; 
     let newPassword  = document.getElementById("inputNewPassword").value; 
     
-    var node = bdUsuarios.searchUser(username);
-    var objectUsuario = node.userObjects;
+    let node = bdUsuarios.searchUser(username);
+    let objectUsuario = node.userObjects;
 
     //codigo condiciones para editar
     if(password == node.password){
@@ -338,6 +337,8 @@ function editar(){
         if(listaHobbies != ""){
             objectUsuario.listaHobbies = listaHobbies;
         }
+
+        alert("El usuario fue editado");
             
     }else{
 
