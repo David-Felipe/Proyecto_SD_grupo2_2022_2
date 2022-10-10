@@ -1,10 +1,7 @@
-//Cola de MiniEventos
-colaMiniEventos = new Queue();
-
 //Metodo de creacion de minieventos
 function crearMiniEvento(nombre, hora, tematica) {
 
-  miniEvento = new Stack();
+  let miniEvento = new Stack();
   miniEvento.push(nombre);
   miniEvento.push(hora);
   miniEvento.push(tematica);
@@ -38,7 +35,7 @@ function actualizacionMiniEvento(miniEvento,nuevonombre,nuevahora,nuevatematica)
 function eliminarMiniEvento(){
     eliminado = colaMiniEventos.dequeue();
     //con fines de control, devolvemos el elemento eliminado.
-    console.log(eliminado);
+    //console.log(eliminado);
 }
 //PD:funciona con las estructuras de datos implementadas en el documento de laura
 
