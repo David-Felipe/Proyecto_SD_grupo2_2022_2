@@ -129,11 +129,15 @@ export class LinkedList<T> {
     //toppers
     topFront(): T {
 
+        if (this.isEmpty()) throw new Error("You cannot top an empty list");
+
         return this.head.getData();
 
     }
 
     topBack(): T {
+
+        if (this.isEmpty()) throw new Error("You cannot top an empty list");
 
         return this.tail.getData();
 
@@ -189,7 +193,7 @@ export class LinkedList<T> {
     // CusorAt
     takeCursorTo(index: number): void {
 
-        if (index >= this.numElements) throw new Error("El indice dado (" + index.toString() + ") es mayor que el numero de elementos en la lista (" + this.numElements.toString + ")");
+        if (index >= this.numElements) throw new Error("El indice dado (" + index.toString() + ") es mayor que el numero de elementos en la lista (" + this.numElements.toString() + ")");
 
         if (index < 0) throw new Error("El indice dado (" + index.toString() + ") es menor que cero");
 
@@ -226,11 +230,13 @@ export class LinkedList<T> {
 
         if (index == 0) {
 
+            this.numElements--;
             return this.popFront();
 
         }
         else if (index == this.numElements - 1) {
 
+            this.numElements--;
             return this.popBack();
 
         }
@@ -241,12 +247,14 @@ export class LinkedList<T> {
         anterior.setNext(siguiente);
         siguiente.setPrevious(anterior);
 
-
+        this.numElements--;
         return borrado;
 
     }
 
     getCopy(): LinkedList<T> {
+
+        if (this.isEmpty()) throw Error("Cannot copy an empty list");
 
         this.cursor = this.head;
         let copia: LinkedList<T> = new LinkedList<T>();
