@@ -3,7 +3,7 @@ class AvlNode<T>{
 
     private ID: number;
     private data: T;
-    private height: number = 0;
+    private height = 0;
     private parent: AvlNode<T> | null = null;
     private rightSon: AvlNode<T> | null = null;
     private leftSon: AvlNode<T> | null = null;
@@ -124,12 +124,12 @@ export class AvlBst<T> {
             foundNode = this.findNode(searchedID, this.root);
             if (foundNode.getID() == searchedID) return foundNode.getData();
 
-            let errorMessage: String = `Node with searchedID: ${searchedID} wasn't found`;
+            const errorMessage = `Node with searchedID: ${searchedID} wasn't found`;
             throw Error(errorMessage.toString());
 
         }
 
-        let errorMessage: String = "Tree is empty cannot find anything";
+        const errorMessage = "Tree is empty cannot find anything";
         throw Error(errorMessage.toString());
 
     }
@@ -143,19 +143,19 @@ export class AvlBst<T> {
             foundNode = this.findNode(searchedID, this.root);
             if (foundNode.getID() == searchedID) return foundNode;
 
-            let errorMessage: String = `Node with searchedID: ${searchedID} wasn't found`;
+            const errorMessage = `Node with searchedID: ${searchedID} wasn't found`;
             throw Error(errorMessage.toString());
 
         }
 
-        let errorMessage: String = "Tree is empty cannot find anything";
+        const errorMessage = "Tree is empty cannot find anything";
         throw Error(errorMessage.toString());
 
     }
 
     private findNode(searchedID: number, rootSearched: AvlNode<T>): AvlNode<T> {
 
-        let currentID = rootSearched.getID();
+        const currentID = rootSearched.getID();
 
         if (currentID == searchedID) {
 
@@ -164,7 +164,7 @@ export class AvlBst<T> {
         }
         else if (searchedID > currentID) {
 
-            let currentRightSon: AvlNode<T> | null = rootSearched.getRightSon();
+            const currentRightSon: AvlNode<T> | null = rootSearched.getRightSon();
             if (currentRightSon != null) return this.findNode(searchedID, currentRightSon);
 
             return rootSearched;
@@ -172,7 +172,7 @@ export class AvlBst<T> {
         }
         else if (searchedID < currentID) {
 
-            let currentLeftSon: AvlNode<T> | null = rootSearched.getLeftSon();
+            const currentLeftSon: AvlNode<T> | null = rootSearched.getLeftSon();
             if (currentLeftSon != null) return this.findNode(searchedID, currentLeftSon);
 
             return rootSearched;
@@ -186,7 +186,7 @@ export class AvlBst<T> {
     //find Ancestor and Descendant, could fail and return the root
     findRightDescendant(parentNode: AvlNode<T>): AvlNode<T> {
 
-        let currentRightson: AvlNode<T> | null = parentNode.getRightSon();
+        const currentRightson: AvlNode<T> | null = parentNode.getRightSon();
         if (currentRightson == null) return parentNode;
         return this.findRightDescendant(currentRightson);
 
@@ -194,7 +194,7 @@ export class AvlBst<T> {
 
     findLeftDescendant(parentNode: AvlNode<T>): AvlNode<T> {
 
-        let currentLeftSon: AvlNode<T> | null = parentNode.getLeftSon();
+        const currentLeftSon: AvlNode<T> | null = parentNode.getLeftSon();
         if (currentLeftSon == null) return parentNode;
         return this.findLeftDescendant(currentLeftSon);
 
@@ -202,7 +202,7 @@ export class AvlBst<T> {
 
     private findRightAncestor(sonNode: AvlNode<T>): AvlNode<T> {
 
-        let parentNode: AvlNode<T> | null = sonNode.getParent();
+        const parentNode: AvlNode<T> | null = sonNode.getParent();
 
         if (parentNode != null) {
 
@@ -218,10 +218,10 @@ export class AvlBst<T> {
     // find next
     private findNextNode(currentNode: AvlNode<T>): AvlNode<T> {
 
-        let rightSon = currentNode.getRightSon();
+        const rightSon = currentNode.getRightSon();
         if (rightSon != null) return this.findLeftDescendant(rightSon);
 
-        let rightAncestor = this.findRightAncestor(currentNode);
+        const rightAncestor = this.findRightAncestor(currentNode);
         if (currentNode.getID < rightAncestor.getID) return rightAncestor;
 
         throw Error("There is no next, the node had the max ID in the tree");
@@ -230,26 +230,17 @@ export class AvlBst<T> {
 
     findNextData(currentID: number): T {
 
-        try {
+        const currentNode = this.find(currentID);
+        const nextNode = this.findNextNode(currentNode);
 
-            let currentNode = this.find(currentID);
-            let nextNode = this.findNextNode(currentNode);
-
-            return nextNode.getData();
-
-        }
-        catch (error) {
-
-            throw error;
-
-        }
+        return nextNode.getData();
 
     }
 
     // rangeSearch
     searchRange(beggID: number, endID: number): LinkedList<T> {
 
-        let nodesInRange: LinkedList<T> = new LinkedList<T>();
+        const nodesInRange: LinkedList<T> = new LinkedList<T>();
         let currentNode: AvlNode<T> = this.find(beggID);
 
         while (currentNode.getID() <= endID) {
@@ -267,7 +258,7 @@ export class AvlBst<T> {
     // Inserting a node
     insert(newNodeData: T, newNodeID: number) {
 
-        let newNode: AvlNode<T> = new AvlNode<T>(newNodeData, newNodeID);
+        const newNode: AvlNode<T> = new AvlNode<T>(newNodeData, newNodeID);
 
         if (this.root != null) this.insertNode(newNode, this.root);
         else this.root = newNode;
@@ -276,11 +267,9 @@ export class AvlBst<T> {
 
     private insertNode(newNode: AvlNode<T>, treeToInsert: AvlNode<T>) {
 
-        let newNodeID = newNode.getID();
-        let parentNewNode: AvlNode<T>;
-
-        parentNewNode = this.findNode(newNodeID, treeToInsert);
-        let parentID: number = parentNewNode.getID();
+        const newNodeID = newNode.getID();
+        const parentNewNode = this.findNode(newNodeID, treeToInsert);
+        const parentID: number = parentNewNode.getID();
 
         if (newNodeID == parentNewNode.getID()) throw Error(`El ID ${newNodeID} ya existe, no se pudo insertar el nuevo dato`);
         else if (newNodeID > parentID) parentNewNode.setRightSon(newNode);
@@ -298,15 +287,15 @@ export class AvlBst<T> {
         if (this.root != null) nodeToDelete = this.find(idNode);
         else throw Error("El arbol está vacio, no puedes borrar nada más");
 
-        let leftSon = nodeToDelete.getLeftSon();
-        let rightSon = nodeToDelete.getRightSon();
-        let parent = nodeToDelete.getParent();
+        const leftSon = nodeToDelete.getLeftSon();
+        const rightSon = nodeToDelete.getRightSon();
+        const parent = nodeToDelete.getParent();
 
         if (leftSon != null && rightSon != null) {
 
-            let descendant = this.findNextNode(nodeToDelete);
-            let desParent = descendant.getParent();
-            let desRightSon = descendant.getRightSon();
+            const descendant = this.findNextNode(nodeToDelete);
+            const desParent = descendant.getParent();
+            const desRightSon = descendant.getRightSon();
 
             // descendant right son gets promoted
             desParent?.setLeftSon(desRightSon);
@@ -339,8 +328,8 @@ export class AvlBst<T> {
             }
             else {
 
-                let idParent = parent.getID();
-                let idDeleted = nodeToDelete.getID();
+                const idParent = parent.getID();
+                const idDeleted = nodeToDelete.getID();
 
                 if (idDeleted > idParent) parent.setRightSon(null);
                 if (idDeleted < idParent) parent.setLeftSon(null);

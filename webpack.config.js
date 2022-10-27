@@ -1,6 +1,7 @@
+/* eslint-disable indent */
 const path = require('path');
 module.exports = {
-    // mode: "development", //puede ser "development" o "production"
+    mode: "development", //puede ser "development" o "production"
     entry: './src/index.tsx',
     module: {
         rules: [

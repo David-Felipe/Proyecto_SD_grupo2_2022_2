@@ -26,7 +26,7 @@ class LinLstNode<T> {
     }
 
     // Next modifiers
-    setNext(newNext: LinLstNode<T>): void {
+    setNext(newNext: LinLstNode<T> | null): void {
 
         this.next = newNext;
 
@@ -39,7 +39,7 @@ class LinLstNode<T> {
     }
 
     // Previous modifiers
-    setPrevious(newPrevious: LinLstNode<T>): void {
+    setPrevious(newPrevious: LinLstNode<T> | null): void {
 
         this.previous = newPrevious;
 
@@ -55,9 +55,9 @@ class LinLstNode<T> {
 
 export class LinkedList<T> {
 
-    private head: any;
-    private tail: any;
-    private cursor: any;
+    private head: LinLstNode<T> | null;
+    private tail: LinLstNode<T> | null;
+    private cursor: LinLstNode<T> | null;
     private numElements: number;
 
     constructor() {
@@ -77,7 +77,7 @@ export class LinkedList<T> {
 
     isEmpty(): boolean {
 
-        if (this.numElements == 0) return true;
+        if (this.head == null && this.tail == null) return true;
         return false;
 
     }
@@ -85,18 +85,17 @@ export class LinkedList<T> {
     // pushes
     pushFront(newData: T): void {
 
-        let newNode: LinLstNode<T>;
-        newNode = new LinLstNode<T>(newData);
+        const newNode = new LinLstNode<T>(newData);
 
-        if (this.isEmpty()) {
+        if (this.head == null) {
 
             this.head = newNode;
             this.tail = newNode;
 
         } else {
 
-            newNode.setNext(this.head);
             this.head.setPrevious(newNode);
+            newNode.setNext(this.head);
             this.head = newNode;
 
         }
@@ -107,9 +106,9 @@ export class LinkedList<T> {
 
     pushBack(newData: T) {
 
-        let newNode: LinLstNode<T> = new LinLstNode<T>(newData);
+        const newNode: LinLstNode<T> = new LinLstNode<T>(newData);
 
-        if (this.isEmpty()) {
+        if (this.tail == null) {
 
             this.head = newNode;
             this.tail = newNode;
@@ -129,7 +128,7 @@ export class LinkedList<T> {
     //toppers
     topFront(): T {
 
-        if (this.isEmpty()) throw new Error("You cannot top an empty list");
+        if (this.head == null) throw new Error("You cannot top an empty list");
 
         return this.head.getData();
 
@@ -137,7 +136,7 @@ export class LinkedList<T> {
 
     topBack(): T {
 
-        if (this.isEmpty()) throw new Error("You cannot top an empty list");
+        if (this.tail == null) throw new Error("You cannot top an empty list");
 
         return this.tail.getData();
 
@@ -146,19 +145,21 @@ export class LinkedList<T> {
     //poppers
     popFront(): T {
 
-        if (this.isEmpty()) throw new Error("You cannot pop an empty list");
+        if (this.head == null) throw new Error("You cannot pop an empty list");
 
-        let popped: LinLstNode<T> = this.head;
+        const popped: LinLstNode<T> = this.head;
+        const next = this.head.getNext();
 
-        if (this.head == this.tail) {
+        if (next == null) {
 
             this.head = null;
             this.tail = null;
 
         } else {
 
-            this.head = this.head.getNext();
-            this.head.setPrevious(null);
+            this.head.setNext(null);
+            this.head = next;
+            next.setPrevious(null);
 
         }
 
@@ -169,18 +170,20 @@ export class LinkedList<T> {
 
     popBack(): T {
 
-        if (this.isEmpty()) throw new Error("You cannot pop an empty list");
+        if (this.tail == null) throw new Error("You cannot pop an empty list");
 
-        let popped: LinLstNode<T> = this.tail;
+        const popped: LinLstNode<T> = this.tail;
+        const previous = this.tail.getPrevious();
 
-        if (this.head == this.tail) {
+        if (previous == null) {
 
             this.head = null;
             this.tail = null;
 
         } else {
 
-            this.tail = this.tail.getPrevious();
+            this.tail.setPrevious(null);
+            this.tail = previous;
             this.tail.setNext(null);
 
         }
@@ -199,8 +202,9 @@ export class LinkedList<T> {
 
         this.cursor = this.head;
 
-        for (let i: number = 0; i != index; i++) {
+        for (let i = 0; i != index; i++) {
 
+            if (this.cursor == null) throw new Error("No existe la posición" + i.toString());
             this.cursor = this.cursor.getNext();
 
         }
@@ -210,11 +214,11 @@ export class LinkedList<T> {
     // GetDataAt
     getDataAt(index: number): T {
 
-        let buscado: T;
 
         this.takeCursorTo(index);
 
-        buscado = this.cursor.getData();
+        if (this.cursor == null) throw Error("No se puede obtener el valor en" + index.toString());
+        const buscado = this.cursor.getData();
         this.cursor = this.head;
 
         return buscado;
@@ -226,7 +230,8 @@ export class LinkedList<T> {
 
         this.takeCursorTo(index);
 
-        let borrado: T = this.cursor.getData();
+        if (this.cursor == null) throw Error("No se puede obtener el valor en" + index.toString());
+        const borrado: T = this.cursor.getData();
 
         if (index == 0) {
 
@@ -241,11 +246,11 @@ export class LinkedList<T> {
 
         }
 
-        let siguiente: LinLstNode<T> = this.cursor.getNext();
-        let anterior: LinLstNode<T> = this.cursor.getPrevious();
+        const siguiente: LinLstNode<T> | null = this.cursor.getNext();
+        const anterior: LinLstNode<T> | null = this.cursor.getPrevious();
 
-        anterior.setNext(siguiente);
-        siguiente.setPrevious(anterior);
+        if (anterior != null) anterior.setNext(siguiente);
+        if (siguiente != null) siguiente.setPrevious(anterior);
 
         this.numElements--;
         return borrado;
@@ -257,7 +262,7 @@ export class LinkedList<T> {
         if (this.isEmpty()) throw Error("Cannot copy an empty list");
 
         this.cursor = this.head;
-        let copia: LinkedList<T> = new LinkedList<T>();
+        const copia: LinkedList<T> = new LinkedList<T>();
 
         while (this.cursor != null) {
 
