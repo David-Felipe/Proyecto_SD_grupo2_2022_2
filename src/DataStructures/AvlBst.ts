@@ -29,7 +29,7 @@ class AvlNode<T>{
     }
 
     //data modifiers
-    setData(newData: T, newID: number): void {
+    protected setData(newData: T, newID: number): void {
 
         this.data = newData;
         this.ID = newID;
@@ -102,10 +102,10 @@ export class AvlBst<T> {
     }
 
     // Root and numElements getter
-    getMainRoot(): AvlNode<T> | null {
+    getRootData(): T {
 
-        if (this.root != null) return this.root;
-        return null;
+        if (this.root != null) return this.root.getData();
+        throw Error("Can't return root data, cause tree is empty");
 
     }
 
@@ -116,6 +116,7 @@ export class AvlBst<T> {
     }
 
     // data searcher
+    // * User data searcher
     findData(searchedID: number): T {
 
         let foundNode: AvlNode<T>;
@@ -129,12 +130,13 @@ export class AvlBst<T> {
 
         }
 
-        const errorMessage = "Tree is empty cannot find anything";
+        const errorMessage = "Tree is empty, cannot find anything";
         throw Error(errorMessage.toString());
 
     }
 
     // node Finder
+    // * estrict node finder, if it's not the same, returns error
     private find(searchedID: number): AvlNode<T> {
 
         let foundNode: AvlNode<T>;
@@ -148,7 +150,7 @@ export class AvlBst<T> {
 
         }
 
-        const errorMessage = "Tree is empty cannot find anything";
+        const errorMessage = "Tree is empty, cannot find anything";
         throw Error(errorMessage.toString());
 
     }
@@ -179,12 +181,15 @@ export class AvlBst<T> {
 
         }
 
+        // Should never happen, but ts compiler begged for it
         return rootSearched;
 
     }
 
     //find Ancestor and Descendant, could fail and return the root
-    findRightDescendant(parentNode: AvlNode<T>): AvlNode<T> {
+    // ! when a node doesn't have family, he is his own descendant or ancestor
+    // * Finds max of a given tree
+    private findRightDescendant(parentNode: AvlNode<T>): AvlNode<T> {
 
         const currentRightson: AvlNode<T> | null = parentNode.getRightSon();
         if (currentRightson == null) return parentNode;
@@ -192,7 +197,8 @@ export class AvlBst<T> {
 
     }
 
-    findLeftDescendant(parentNode: AvlNode<T>): AvlNode<T> {
+    // * Finds min of a given tree
+    private findLeftDescendant(parentNode: AvlNode<T>): AvlNode<T> {
 
         const currentLeftSon: AvlNode<T> | null = parentNode.getLeftSon();
         if (currentLeftSon == null) return parentNode;
@@ -200,18 +206,42 @@ export class AvlBst<T> {
 
     }
 
+    // * Finds the first ancestor that is greater than the given son
+    // ! if the initial son was the max then it won't return right ancestor
     private findRightAncestor(sonNode: AvlNode<T>): AvlNode<T> {
 
         const parentNode: AvlNode<T> | null = sonNode.getParent();
 
         if (parentNode != null) {
 
-            if (sonNode.getID() < parentNode.getID()) return parentNode;
-            return this.findRightAncestor(parentNode)
+            // * Case in which sonNode was the max in the tree
+            if (this.root != null) {
+
+                // * If sonNode == max(this.root) return sonNode
+                if (sonNode == this.findRightDescendant(this.root)) return sonNode;
+
+            }
+
+            return this.rightAncestorIterator(sonNode);
 
         }
 
-        return sonNode; // ! if the initial son was the max then it won't return right ancestor
+        return sonNode;
+
+    }
+
+    // * mismo findRightAncestor solo que sin la verficación de max, para que no la repita cada vez
+    private rightAncestorIterator(sonNode: AvlNode<T>): AvlNode<T> {
+
+        const parentNode: AvlNode<T> | null = sonNode.getParent();
+
+        if (parentNode != null) {
+
+            return this.rightAncestorIterator(sonNode);
+
+        }
+
+        return sonNode;
 
     }
 
@@ -228,6 +258,7 @@ export class AvlBst<T> {
 
     }
 
+    // * find next data para usuario
     findNextData(currentID: number): T {
 
         const currentNode = this.find(currentID);
@@ -240,8 +271,10 @@ export class AvlBst<T> {
     // rangeSearch
     searchRange(beggID: number, endID: number): LinkedList<T> {
 
+        if (this.root == null) throw ("El arbol está vacio, no puedo hacer un searchRange");
+
         const nodesInRange: LinkedList<T> = new LinkedList<T>();
-        let currentNode: AvlNode<T> = this.find(beggID);
+        let currentNode: AvlNode<T> = this.findNode(beggID, this.root);
 
         while (currentNode.getID() <= endID) {
 
@@ -256,6 +289,7 @@ export class AvlBst<T> {
     }
 
     // Inserting a node
+    // * Insertar dato para usuario
     insert(newNodeData: T, newNodeID: number) {
 
         const newNode: AvlNode<T> = new AvlNode<T>(newNodeData, newNodeID);
@@ -271,7 +305,7 @@ export class AvlBst<T> {
         const parentNewNode = this.findNode(newNodeID, treeToInsert);
         const parentID: number = parentNewNode.getID();
 
-        if (newNodeID == parentNewNode.getID()) throw Error(`El ID ${newNodeID} ya existe, no se pudo insertar el nuevo dato`);
+        if (newNodeID == parentID) throw Error(`El ID ${newNodeID} ya existe, no se pudo insertar el nuevo dato`);
         else if (newNodeID > parentID) parentNewNode.setRightSon(newNode);
         else if (newNodeID < parentID) parentNewNode.setLeftSon(newNode);
 
@@ -280,89 +314,277 @@ export class AvlBst<T> {
 
     }
 
-    // TODO: Revisame plis
+    // Toda la familia de deletes
+    // * El delete que usa el usuario, elimina un dato
     delete(idNode: number): T {
 
         let nodeToDelete: AvlNode<T> | null;
+
         if (this.root != null) nodeToDelete = this.find(idNode);
         else throw Error("El arbol está vacio, no puedes borrar nada más");
+
+        this.deleteNode(nodeToDelete);
+
+        return nodeToDelete.getData();
+
+    }
+
+    // * Elimina un nodo con un solo hijo y sin padre, devuelve ese nodo
+    private elapseRoot(toBeElapsed: AvlNode<T>): AvlNode<T> {
+
+        const parent: AvlNode<T> | null = toBeElapsed.getParent();
+        if (parent != null) throw Error("ElapseRoot is to elapse roots, not nodes");
+
+        const rightSon: AvlNode<T> | null = toBeElapsed.getRightSon();
+        const leftSon: AvlNode<T> | null = toBeElapsed.getLeftSon();
+
+        const isRightNull: boolean = (rightSon == null);
+        const isLeftNull: boolean = (leftSon == null);
+
+        // XOR de nulidad entre derecho e izquierdo
+        if (isRightNull ? !isLeftNull : isLeftNull) {
+
+            // Caso en que uno es nulo y el otro no
+            // Verifico cual
+            if (leftSon != null) {
+
+                // El izquierdo no es nulo
+                this.root = leftSon;
+                leftSon.setParent(null);
+
+            }
+            else if (rightSon != null) {
+
+                // El derecho no es nulo
+                this.root = rightSon;
+                rightSon.setParent(null);
+
+            }
+
+        }
+        else {
+
+            // Caso en que o ambos son nulos o ambos no lo son
+            throw Error("Node can't be elapsed, both son's are either null or not");
+
+        }
+
+        return toBeElapsed;
+
+    }
+
+    // * Elimina un nodo con un solo hijo y padre, devuelve ese nodo
+    private elapseNode(toBeElapsed: AvlNode<T>): AvlNode<T> {
+
+        const parent: AvlNode<T> | null = toBeElapsed.getParent();
+        if (parent == null) throw Error("ElapseNode elapses nodes, not roots");
+
+        // hijos de toBeElapsed
+        const rightSon: AvlNode<T> | null = toBeElapsed.getRightSon();
+        const leftSon: AvlNode<T> | null = toBeElapsed.getLeftSon();
+
+        const isRightNull: boolean = (rightSon == null);
+        const isLeftNull: boolean = (leftSon == null);
+
+        // XOR de nulidad entre derecho e izquierdo
+        if (isRightNull ? !isLeftNull : isLeftNull) {
+
+            // Caso en que uno es nulo y el otro no
+            this.disconnectSon(toBeElapsed);
+
+            // Verifico cual
+            if (leftSon != null) {
+
+                // El izquierdo no es nulo
+                this.insertNode(leftSon, parent);
+
+            }
+            else if (rightSon != null) {
+
+                // El derecho no es nulo
+                this.insertNode(rightSon, parent);
+
+            }
+
+        }
+        else {
+
+            // Caso en que o ambos son nulos o ambos no lo son
+            throw Error("Node can't be elapsed, both son's are either null or not");
+
+        }
+
+        return toBeElapsed;
+
+    }
+
+    // * Literal, desconecta un padre de un solo hijo y viceversa, luego devuelve al hijo
+    private disconnectSon(son: AvlNode<T>): AvlNode<T> {
+
+        const father: AvlNode<T> | null = son.getParent();
+        if (father == null) throw Error("Can't disconnect son of father, cause father is null");
+        if (!(father.getRightSon() || father.getLeftSon())) throw Error("Can't disconnect son of father, cause both sons are null");
+        if (father.getRightSon() && father.getLeftSon()) throw Error("Can't disconnect son of father, because there are two of them, this's not what I'm supposed to do");
+
+        const sonId = son.getID();
+        const fatherId = father.getID();
+
+        if (sonId == fatherId) {
+
+            throw Error("I can't disconnect the son if he has the same ID that his father");
+
+        }
+        else if (sonId > fatherId) {
+
+            father.setRightSon(null);
+            son.setParent(null);
+
+        }
+        else if (sonId < fatherId) {
+
+            father.setLeftSon(null);
+            son.setParent(null);
+
+        }
+
+        return son;
+
+    }
+
+    // * Reemplaza la raiz con replacement (nodo huerfano, aislado), dejando en replacement la familia de la raiz
+    private replaceRoot(replacement: AvlNode<T>): AvlNode<T> | null {
+
+        const repRoot = this.root;
+
+        let parent: AvlNode<T> | null;
+        let rightSon: AvlNode<T> | null;
+        let leftSon: AvlNode<T> | null;
+
+        if (repRoot == null) {
+
+            parent = null;
+            rightSon = null;
+            leftSon = null;
+
+        }
+        else {
+
+            parent = repRoot.getParent();
+            if (parent != null) throw Error("Can't replace this root, it may not be a root, it's parent was not null");
+
+            rightSon = repRoot.getRightSon();
+            leftSon = repRoot.getLeftSon();
+
+        }
+
+        this.root = replacement;
+
+        replacement.setParent(parent);     // En caso de que replacement venga con un padre
+        replacement.setLeftSon(leftSon);
+        replacement.setRightSon(rightSon);
+
+        return repRoot;
+
+    }
+
+    // * reemplaza un nodo replaced con replacement
+    private replaceNode(replaced: AvlNode<T>, replacement: AvlNode<T>): AvlNode<T> {
+
+        const parent = replaced.getParent();
+        if (parent == null) throw Error("replaceNode is to replace nodes not roots");
+
+        const rightSon = replaced.getRightSon();
+        const leftSon = replaced.getLeftSon();
+
+        replacement.setParent(parent);
+        replacement.setRightSon(rightSon);
+        replacement.setLeftSon(leftSon);
+
+        this.insertNode(replacement, parent);
+
+        return replaced;
+
+    }
+
+    private deleteNode(nodeToDelete: AvlNode<T>): AvlNode<T> {
 
         const leftSon = nodeToDelete.getLeftSon();
         const rightSon = nodeToDelete.getRightSon();
         const parent = nodeToDelete.getParent();
 
-        if (leftSon != null && rightSon != null) {
+        // naturaleza del padre
+        if (parent == null) {
 
-            const descendant = this.findNextNode(nodeToDelete);
-            const desParent = descendant.getParent();
-            const desRightSon = descendant.getRightSon();
+            // naturaleza de los hijos
+            if (leftSon == null && rightSon == null) {
 
-            // descendant right son gets promoted
-            desParent?.setLeftSon(desRightSon);
-            desRightSon?.setParent(desParent);
+                // es la raiz?
+                if (nodeToDelete == this.root) {
 
-            // descendant takes the place of nodeToDel
-            if (descendant == rightSon) {           // * special but problematic case
+                    this.root = null;
 
-                descendant.setRightSon(desRightSon);
-                desRightSon?.setParent(descendant);
+                }
+                else throw Error("El padre del nodo era nulo, pero el nodo no era la raiz, q acaso estás buscando pelea? Elmo no tolerará tus estupideces...");
 
             }
-            else {                                  // * all other cases
+            else if (leftSon ? !rightSon : rightSon) {
 
-                descendant.setRightSon(rightSon);
-                desRightSon?.setParent(desParent);
+                // es la raiz?
+                if (nodeToDelete == this.root) {
 
-            }
+                    this.elapseRoot(nodeToDelete);
 
-            descendant.setLeftSon(leftSon);
-            if (parent != null) this.insertNode(descendant, parent);
-
-        }
-        else if (rightSon == null && leftSon == null) {
-
-            if (parent == null) {
-
-                this.root = null;
+                }
+                else throw Error("El padre del nodo era nulo, pero el nodo no era la raiz, q acaso estás buscando pelea? Elmo no tolerará tus estupideces...");
 
             }
-            else {
+            else if (rightSon != null && leftSon != null) {
 
-                const idParent = parent.getID();
-                const idDeleted = nodeToDelete.getID();
+                // es la raiz?
+                if (nodeToDelete == this.root) {
 
-                if (idDeleted > idParent) parent.setRightSon(null);
-                if (idDeleted < idParent) parent.setLeftSon(null);
+                    const descendant = this.findLeftDescendant(rightSon);
+                    this.elapseNode(descendant);
+                    this.replaceRoot(descendant);
+
+                }
+                else throw Error("El padre del nodo era nulo, pero el nodo no era la raiz, q acaso estás buscando pelea? Elmo no tolerará tus estupideces...");
 
             }
 
         }
-        else if (leftSon == null) {
+        else {
 
-            if (parent == null) this.root = null;
-            else {
+            // el padre no es nulo
+            // naturaleza de los hijos
+            if (leftSon == null && rightSon == null) {
 
-                if (rightSon != null) this.insertNode(rightSon, parent);
+                // Ambos hijos eran nulos
+                this.disconnectSon(nodeToDelete);
 
             }
+            else if (leftSon ? !rightSon : rightSon) {
 
-        }
-        else if (rightSon == null) {
+                // Uno solo de los dos hijos es nulo
+                this.elapseNode(nodeToDelete);
 
-            if (parent == null) this.root == null;
-            else {
+            }
+            else if (leftSon != null && rightSon != null) {
 
-                this.insertNode(leftSon, parent);
+                // Ambos hijos no son nulos
+                const descendant = this.findLeftDescendant(rightSon);
+                this.elapseNode(descendant);
+                this.replaceNode(nodeToDelete, descendant);
 
             }
 
         }
 
         this.numElements--;
-        return nodeToDelete.getData();
+        return nodeToDelete;
 
     }
 
-    // TODO si todo lo arriba está bien, ya solo faltaría implementar rotaciones y balanceo
+    // TODO rotaciones y balanceo, terminé el delete, no mames, casi que no
 
 }
