@@ -28,7 +28,9 @@ class AvlNode<T>{
 
     }
 
-    //data modifiers
+    // data modifiers
+    // ! NO se puede cambiar el dato de un nodo
+    // * Ya no se podrían encontrar los datos en el arbol
     protected setData(newData: T, newID: number): void {
 
         this.data = newData;
@@ -45,6 +47,14 @@ class AvlNode<T>{
     getID(): number {
 
         return this.ID;
+
+    }
+
+    // ! NO se puede cambiar el ID de un nodo
+    // * Eso se tiraría el arbol
+    protected setID(newID: number) {
+
+        this.ID = newID;
 
     }
 
@@ -323,6 +333,9 @@ export class AvlBst<T> {
         if (this.root != null) nodeToDelete = this.find(idNode);
         else throw Error("El arbol está vacio, no puedes borrar nada más");
 
+        // TODO FIXME, borra esta linea de testeo
+        console.log("El nodo a borrar es el de ID:" + nodeToDelete.getID().toString());
+
         this.deleteNode(nodeToDelete);
 
         return nodeToDelete.getData();
@@ -585,6 +598,40 @@ export class AvlBst<T> {
 
     }
 
-    // TODO rotaciones y balanceo, terminé el delete, no mames, casi que no
+    // TODO rotaciones y balanceo, terminé el delete, no mames, casi que no, mañana termino rotaciones y balanceo
+
+    // Para testeto
+    // * devuelve una fila (LinkedList) con el historial de nodos traversados
+    breadthFirstTraverse(searchRoot?: AvlNode<T>): LinkedList<T> {
+
+        let firstNode: AvlNode<T> | null;
+        if (searchRoot == undefined) firstNode = this.root;
+        else firstNode = searchRoot;
+        if (firstNode == null) throw Error("searchRoot was equal to null, can't traverse anything");
+
+        const traversalQueue = new LinkedList<T>();
+        const compassStack = new LinkedList<AvlNode<T>>();
+
+        let current: AvlNode<T>;
+        let rightSon: AvlNode<T> | null;
+        let leftSon: AvlNode<T> | null;
+
+        compassStack.pushFront(firstNode);
+
+        do {
+
+            current = compassStack.popFront()
+            rightSon = current.getRightSon();
+            leftSon = current.getLeftSon();
+
+            traversalQueue.pushFront(current.getData());
+            if (rightSon != null) compassStack.pushFront(rightSon);
+            if (leftSon != null) compassStack.pushFront(leftSon);
+
+        } while (!compassStack.isEmpty());
+
+        return traversalQueue;
+
+    }
 
 }

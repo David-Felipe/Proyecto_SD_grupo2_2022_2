@@ -1,10 +1,12 @@
 import * as React from "react";
 import UserInterface from '../UserInterface'
 
-export default class UserComponent extends React.Component<UserInterface, {}> {
+export default class UserComponent extends React.Component<UserInterface, unknown> {
+
     constructor(props: UserInterface) {
         super(props);
     }
+
     render() {
         return (
             <div>
