@@ -107,7 +107,7 @@ export class AvlBst<T> {
     constructor(firstData: T, firstID: number) {
 
         this.root = new AvlNode(firstData, firstID);
-        this.numElements = 0;
+        this.numElements = 1;
 
     }
 
@@ -305,7 +305,12 @@ export class AvlBst<T> {
         const newNode: AvlNode<T> = new AvlNode<T>(newNodeData, newNodeID);
 
         if (this.root != null) this.insertNode(newNode, this.root);
-        else this.root = newNode;
+        else {
+            this.root = newNode;
+            newNode.setParent(null);
+        }
+
+        this.numElements++;
 
     }
 
@@ -320,7 +325,6 @@ export class AvlBst<T> {
         else if (newNodeID < parentID) parentNewNode.setLeftSon(newNode);
 
         newNode.setParent(parentNewNode);
-        this.numElements++;
 
     }
 
@@ -364,6 +368,7 @@ export class AvlBst<T> {
                 // El izquierdo no es nulo
                 this.root = leftSon;
                 leftSon.setParent(null);
+                toBeElapsed.setLeftSon(null);
 
             }
             else if (rightSon != null) {
@@ -371,6 +376,7 @@ export class AvlBst<T> {
                 // El derecho no es nulo
                 this.root = rightSon;
                 rightSon.setParent(null);
+                toBeElapsed.setRightSon(null);
 
             }
 
@@ -431,13 +437,17 @@ export class AvlBst<T> {
 
     }
 
-    // * Literal, desconecta un padre de un solo hijo y viceversa, luego devuelve al hijo
+    // * Literal, desconecta un padre del hijo indicado y viceversa, luego devuelve al hijo
     private disconnectSon(son: AvlNode<T>): AvlNode<T> {
 
         const father: AvlNode<T> | null = son.getParent();
+
         if (father == null) throw Error("Can't disconnect son of father, cause father is null");
-        if (!(father.getRightSon() || father.getLeftSon())) throw Error("Can't disconnect son of father, cause both sons are null");
-        if (father.getRightSon() && father.getLeftSon()) throw Error("Can't disconnect son of father, because there are two of them, this's not what I'm supposed to do");
+
+        const ftrLeftSon: AvlNode<T> | null = father.getLeftSon();
+        const ftrRigthSon: AvlNode<T> | null = father.getRightSon();
+
+        if (ftrLeftSon == null && ftrRigthSon == null) throw Error("Can't disconnect son of father, cause both sons are null");
 
         const sonId = son.getID();
         const fatherId = father.getID();
@@ -447,15 +457,16 @@ export class AvlBst<T> {
             throw Error("I can't disconnect the son if he has the same ID that his father");
 
         }
-        else if (sonId > fatherId) {
 
-            father.setRightSon(null);
+        else if (ftrLeftSon != null && ftrLeftSon.getID() == sonId) {
+
+            father.setLeftSon(null);
             son.setParent(null);
 
         }
-        else if (sonId < fatherId) {
+        else if (ftrRigthSon != null && ftrRigthSon.getID() == sonId) {
 
-            father.setLeftSon(null);
+            father.setRightSon(null);
             son.setParent(null);
 
         }
@@ -483,7 +494,7 @@ export class AvlBst<T> {
         else {
 
             parent = repRoot.getParent();
-            if (parent != null) throw Error("Can't replace this root, it may not be a root, it's parent was not null");
+            if (parent != null) throw Error("Can't replace this root, it may not be a root, its parent was not null");
 
             rightSon = repRoot.getRightSon();
             leftSon = repRoot.getLeftSon();
@@ -492,9 +503,13 @@ export class AvlBst<T> {
 
         this.root = replacement;
 
-        replacement.setParent(parent);     // En caso de que replacement venga con un padre
+        replacement.setParent(parent);     // En caso de que replacement venga con padre, se pone nulo
+
         replacement.setLeftSon(leftSon);
+        if (leftSon != null) leftSon.setParent(replacement);
+
         replacement.setRightSon(rightSon);
+        if (rightSon != null) rightSon.setParent(replacement);
 
         return repRoot;
 
@@ -509,9 +524,14 @@ export class AvlBst<T> {
         const rightSon = replaced.getRightSon();
         const leftSon = replaced.getLeftSon();
 
-        replacement.setParent(parent);
         replacement.setRightSon(rightSon);
+        if (rightSon != null) rightSon.setParent(replacement);
+
         replacement.setLeftSon(leftSon);
+        if (leftSon != null) leftSon.setParent(replacement);
+
+        // break the links of replaced so they don't interfere with insert
+        this.disconnectSon(replaced);
 
         this.insertNode(replacement, parent);
 
@@ -557,7 +577,8 @@ export class AvlBst<T> {
                 if (nodeToDelete == this.root) {
 
                     const descendant = this.findLeftDescendant(rightSon);
-                    this.elapseNode(descendant);
+                    if (descendant.getRightSon() != null) this.elapseNode(descendant);
+                    else this.disconnectSon(descendant);
                     this.replaceRoot(descendant);
 
                 }
@@ -586,7 +607,8 @@ export class AvlBst<T> {
 
                 // Ambos hijos no son nulos
                 const descendant = this.findLeftDescendant(rightSon);
-                this.elapseNode(descendant);
+                if (descendant.getRightSon() != null) this.elapseNode(descendant);
+                else this.disconnectSon(descendant);
                 this.replaceNode(nodeToDelete, descendant);
 
             }
