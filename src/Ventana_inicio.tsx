@@ -1,3 +1,4 @@
+// En esta ventana hace falta agregar la ventana emergente cuando el usuario es incorrecto, estoy en eso.
 import React from "react";
 import "./Ventana_inicio.css";
 

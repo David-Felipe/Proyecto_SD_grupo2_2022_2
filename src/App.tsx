@@ -26,8 +26,8 @@ export default class App extends React.Component<{}, State> {
       perfil_atributo: {
         name: "Juan",
         lastname: "Carreño",
-        email: "Kely",
-        username: "Importa",
+        email: "jcarrenoar",
+        username: "jcarrenoar",
         password: "12345",
         confirm_password: "******",
       },
