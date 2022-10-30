@@ -1,3 +1,4 @@
+//Formulario donde se ingresa la informacion del usuario.
 import React from "react";
 import "./Ventana_registro.css";
 import Banner from "./Banner/Banner";

@@ -1,3 +1,4 @@
+// Ventana donde se redirecciona para crear eventos
 import React from "react";
 import "./Ventana_Evento.css";
 import Banner from "./Banner/Banner";

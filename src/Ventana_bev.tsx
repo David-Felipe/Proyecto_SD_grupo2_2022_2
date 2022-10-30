@@ -1,3 +1,4 @@
+// Ventana para mostrar los eventos cercanos y sus caracteristicas.
 import React from "react";
 import "./Ventana_bev.css";
 import Banner from "./Banner/Banner";

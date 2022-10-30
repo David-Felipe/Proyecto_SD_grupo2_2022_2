@@ -1,3 +1,4 @@
+// Ventana a la que se dirige para editar los eventos.
 import React from "react";
 import "./Ventana_dev.css";
 import Banner from "./Banner/Banner";

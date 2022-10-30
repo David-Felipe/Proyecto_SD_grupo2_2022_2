@@ -1,3 +1,4 @@
+// Ventana donde se puede decidir si registrar usuario o ingresar en uno ya registrado.
 // En esta ventana hace falta agregar la ventana emergente cuando el usuario es incorrecto, estoy en eso.
 import React from "react";
 import "./Ventana_inicio.css";
