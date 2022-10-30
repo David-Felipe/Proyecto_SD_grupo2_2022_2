@@ -1,0 +1,67 @@
+.Banner {
+  position: absolute;
+  width: 1440px;
+  height: 130px;
+  left: 0px;
+  top: 0px;
+
+  background: #100138;
+}
+
+/* En este caso h1 hace referencia a la plabra "SMILE" unicamente */
+h1 {
+  position: absolute;
+  width: 350px;
+  height: 77px;
+  left: 50px;
+  top: -75px;
+
+  font-family: "Times New Roman", Times, serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 120px;
+  line-height: 150px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #f8f5e7;
+
+  border: 1px solid #000000;
+  backdrop-filter: blur(2px);
+}
+
+/* label subtitle es lo que continua en el banner, "conect with people" */
+.label_subtitle {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 480px;
+  top: 10px;
+
+  font-family: "Moon Dance";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 90px;
+  line-height: 121px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #f8f5e7;
+}
+
+.img:hover {
+  background-color: #197090;
+}
+
+/* Esta la imagen con las dimensiones sacadas del mismo figma */
+.icono {
+  position: absolute;
+  width: 135px;
+  height: 135px;
+  left: 1290px;
+  top: 0px;
+
+  background: none;
+}
