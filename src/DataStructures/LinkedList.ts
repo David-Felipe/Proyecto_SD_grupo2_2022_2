@@ -77,7 +77,8 @@ export class LinkedList<T> {
 
     isEmpty(): boolean {
 
-        if (this.head == null && this.tail == null) return true;
+        if (this.numElements == 0) return true;
+        else if (this.numElements < 0) throw Error("numElements is less than zero");
         return false;
 
     }
