@@ -1,7 +1,7 @@
 //Ventana donde se muestra toda la informacion del perfil.
 import React, { ChangeEvent } from "react";
 import "./Ventana_perfil.css";
-import {Perfil} from "./App";
+import {Perfil} from "../App";
 
 interface Props {
     perfil: Perfil;

@@ -1,7 +1,7 @@
 // Ventana para mostrar los eventos cercanos y sus caracteristicas.
 import React from "react";
 import "./Ventana_bev.css";
-import Banner from "./Banner/Banner";
+import Banner from "../Banner/Banner";
 
 export default class Ventana_bev extends React.Component<{}> {
   render(): JSX.Element {

@@ -1,10 +1,10 @@
 import React from "react";
-import Ventana_bev from "Ventana_bev";
-import Ventana_dev from "Ventana_dev";
-import Ventana_Evento from "Ventana_Evento";
-import Ventana_perfil from "Ventana_perfil";
-import Ventana_registro from "Ventana_registro";
-import Ventana_inicio from "./Ventana_inicio";
+import Ventana_bev from "./Ventanas/Ventana_bev";
+import Ventana_dev from "./Ventanas/Ventana_dev";
+import Ventana_Evento from "./Ventanas/Ventana_Evento";
+import Ventana_perfil from "./Ventanas/Ventana_perfil";
+import Ventana_registro from "./Ventanas/Ventana_registro";
+import Ventana_inicio from "./Ventanas/Ventana_inicio";
 
 export interface Perfil {
   name: string;

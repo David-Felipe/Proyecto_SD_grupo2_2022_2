@@ -1,7 +1,7 @@
 // Ventana donde se redirecciona para crear eventos
 import React from "react";
 import "./Ventana_Evento.css";
-import Banner from "./Banner/Banner";
+import Banner from "../Banner/Banner";
 
 export default class Ventana_Evento extends React.Component<{}> {
   render(): JSX.Element {

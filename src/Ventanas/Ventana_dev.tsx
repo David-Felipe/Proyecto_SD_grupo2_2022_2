@@ -1,7 +1,7 @@
 // Ventana a la que se dirige para editar los eventos.
 import React from "react";
 import "./Ventana_dev.css";
-import Banner from "./Banner/Banner";
+import Banner from "../Banner/Banner";
 
 export default class Ventana_bev extends React.Component<{}> {
   render(): JSX.Element {
