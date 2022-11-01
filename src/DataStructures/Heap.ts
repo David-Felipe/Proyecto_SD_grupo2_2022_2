@@ -22,8 +22,8 @@ class Heap {
     //
     //metodo que intercambia el lugar de 2 valores en una lista (lo hace tanto para la lista de id como para la lista de datos)
     swamp(i: number,newi: number){
-        let idtemporal = this.id_array[i];
-        let datatemporal = this.data_array[i];
+        const idtemporal = this.id_array[i];
+        const datatemporal = this.data_array[i];
         this.id_array[i] = this.id_array[newi];
         this.data_array[i] = this.data_array[newi];
         this.id_array[newi] = idtemporal;
@@ -31,7 +31,7 @@ class Heap {
     }
     //retorna los arreglos de datos unicamente para testeo.
     informacion(){
-        let resultados = [this.id_array,this.data_array]
+        const resultados = [this.id_array,this.data_array]
         return resultados
     }
     //retorna el id del padre
@@ -58,11 +58,11 @@ class Heap {
     //tamiza un valor hacia abajo (consultar el video al principio del codigo para mas claridad)
     siftdown(i: number){
         let maxindex = i
-        let left = this.leftchild(i)
+        const left = this.leftchild(i)
         // si existe un hijo izquierdo (left<= this.size) y el valor del hijo izquierdo es mayor que el actual se reasigna el actual con el fin de intercambiarlo 
         if (left<= this.size && this.id_array[left]> this.id_array[maxindex]){
             maxindex=left;
-        let right = this.rightchild(i);
+        const right = this.rightchild(i);
         // si existe un hijo derecho (right<= this.size) y el valor del hijo derecho es mayor que el actual se reasigna el actual con el fin de intercambiarlo 
         if (right<= this.size && this.id_array[right]> this.id_array[maxindex]){
             maxindex=right;
@@ -95,15 +95,15 @@ class Heap {
     }
     // extrae el valor maximo del monticulo
     extractmax(){
-        let idresult = this.id_array[1]
-        let dataresult = this.data_array[1]
+        const idresult = this.id_array[1]
+        const dataresult = this.data_array[1]
         //remplazamos el primer lugar del monticulo con un dato ya existente en el mismo y tamizamos hacia abajo dando como resultado una eliminacion perfecta.
         this.id_array[1] = this.id_array[this.size]
         this.data_array[1] = this.data_array[this.size]
         this.size = this.size - 1
         this.siftdown(1)
         //retornamos ambos valores obtenidos en forma de arreglo con el fin de tener acceso a ambos valores en caso de ser necesario.
-        let retornar = [idresult,dataresult]
+        const retornar = [idresult,dataresult]
         return retornar
     }
     // elimina un nodo en especifico 
@@ -114,7 +114,7 @@ class Heap {
     }
     // cambia la prioridad de un nodo ya existente.
     changepriority(i: number,p: number){
-        let oldp = this.id_array[i]
+        const oldp = this.id_array[i]
         this.id_array[i] = p
         if (p>oldp){
             this.siftup(i)
