@@ -78,7 +78,7 @@
   border-radius: 66px;
 }
 
-.titulo {
+.information {
   position: absolute;
   width: 383px;
   height: 15px;
@@ -97,7 +97,7 @@
   color: #000000;
 }
 
-.nombre {
+.nombre_ev {
   position: absolute;
   width: 161.68px;
   height: 24.34px;

@@ -17,6 +17,7 @@ export interface Perfil {
 
 interface State {
   perfil_atributo: Perfil;
+  active: string;
 }
 
 export default class App extends React.Component<{}, State> {
@@ -31,6 +32,11 @@ export default class App extends React.Component<{}, State> {
         password: "12345",
         confirm_password: "******",
       },
+      //Modificar el active porque no todas la ventanas se conectan por botones
+      // INICIO - VENTANA EMERGENTE - REGISTRO (conectadas)
+      // EDITAR - PERFIL (conectadas)
+      // BUSQUEDA - EVENTO (conectadas)
+      active: "INICIO"
     };
   }
 
@@ -39,12 +45,40 @@ export default class App extends React.Component<{}, State> {
     console.log(this.state);
   };
 
+  setActive = (input:string) =>{
+    this.setState({active:input})
+  }
+
   render(): JSX.Element {
+    let ventana: JSX.Element;
+    ventana = <Ventana_inicio setActive={this.setActive}/>
+
+    let active = this.state.active;
+
+    switch(active){
+      case "INICIO":
+        ventana = <Ventana_inicio setActive={this.setActive}/>
+        break
+      case "REGISTRO":
+        ventana = <Ventana_registro setActive={this.setActive}/>
+        break
+      case "PERFIL":
+        ventana = <Ventana_perfil perfil={this.state.perfil_atributo} edit={this.setPerfil} setActive={this.setActive}/>
+        break
+      case "EVENTO":
+        ventana = <Ventana_Evento setActive={this.setActive}/>
+        break
+      case "BUSQUEDA":
+        ventana = <Ventana_bev setActive={this.setActive}/>
+        break
+      case "EDITAR":
+        ventana = <Ventana_dev setActive={this.setActive}/>
+        break
+    }
+
     return (
       <>
-        {/* Aqui se hace llamado al body que va a mostrar el index.html, en el caso de venta_perfil es especial solo deben quitar del comentario la siguiente linea para ver la venta_perfil. */}
-        {/* <Ventana_perfil perfil={this.state.perfil_atributo} edit={this.setPerfil}/> */}
-        <Ventana_inicio />
+        {ventana}
       </>
     );
   }

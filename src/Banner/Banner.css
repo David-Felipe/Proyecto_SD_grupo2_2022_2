@@ -51,6 +51,16 @@ h1 {
   color: #f8f5e7;
 }
 
+.iconoImg{
+  position: absolute;
+  width: 135px;
+  height: 135px;
+  left: 0px;
+  top: 0px;
+
+  background: none;
+}
+
 .img:hover {
   background-color: #197090;
 }

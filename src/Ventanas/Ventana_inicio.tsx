@@ -4,20 +4,23 @@ import React from "react";
 import Ventana_emergente from "./Ventana_emergente";
 import "./Ventana_inicio.css";
 
-interface State{
-  showError:boolean
+interface State {
+  showError: boolean;
 }
-export class Ventana_inicio extends React.Component<{},State> {
 
-  constructor(props: {}) {
-    super(props)
-    this.state = {showError: false};
+interface Props {
+  setActive: (input: string) => void;
+}
+
+export class Ventana_inicio extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = { showError: false };
   }
 
   changeShowError = (condition: boolean) => {
-    this.setState({showError: condition})
-    console.log(this.state)
-  }
+    this.setState({ showError: condition });
+  };
 
   render(): JSX.Element {
     return (
@@ -61,7 +64,11 @@ export class Ventana_inicio extends React.Component<{},State> {
                 </button>
                 <br></br>
                 {/* <!-- El boton sing in redirecciona a la pantalla de formulario --> */}
-                <button type="button" className="button_singin">
+                <button
+                  type="button"
+                  className="button_singin"
+                  onClick={() => this.props.setActive("REGISTRO")}
+                >
                   <a
                     href="D:\Desktop\juanXo\U\2022 - 2S\Estructuras de datos\Proyecto\Mockups Interfaz\Ventana de Registro\Registro.html"
                     className="singIn"
@@ -75,8 +82,8 @@ export class Ventana_inicio extends React.Component<{},State> {
         </section>
         {this.state.showError && (
           <Ventana_emergente
-            showError={this.state.showError}
             changeShowError={this.changeShowError}
+            setActive={this.props.setActive}
           />
         )}
       </>

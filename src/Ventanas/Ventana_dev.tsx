@@ -3,7 +3,16 @@ import React from "react";
 import "./Ventana_dev.css";
 import Banner from "../Banner/Banner";
 
-export default class Ventana_bev extends React.Component<{}> {
+interface Props {
+    setActive: (input: string) => void;
+  }
+
+export default class Ventana_bev extends React.Component<Props,{}> {
+
+    constructor(props: Props) {
+        super(props);
+      }
+
   render(): JSX.Element {
     return (
         <section className="home">
@@ -18,9 +27,9 @@ export default class Ventana_bev extends React.Component<{}> {
                     </div>
                     <div className="formulario">
                         {/* <!-- Aqui va la lista de resultados de consulta --> */}
-                        <label className="titulo">INFORMATION ABOUT YOUR EVENT</label>
+                        <label className="titulo_e">INFORMATION ABOUT YOUR EVENT</label>
                         <div>
-                            <label className="nombre" id="etiquetaName">Name </label>
+                            <label className="nombre_e" id="etiquetaName">Name </label>
                             <input className="inputName" id="inputName"/>
                             <br></br>
                         </div>
@@ -45,7 +54,7 @@ export default class Ventana_bev extends React.Component<{}> {
                         <input className="inputThematics1" id="inputThematics"/>
                         <br></br>
                         </div>
-                        <button className="button_create" type="button" id="button_create">
+                        <button className="button_create" type="button" id="button_create" onClick={() => this.props.setActive("PERFIL")}>
                             <a className="link" href="D:\Desktop\juanXo\U\2022 - 2S\Estructuras de datos\Proyecto\Mockups Interfaz\Ventana Perfil\Ventana Perfil.html" >EDIT</a>
                         </button>
                     </div>

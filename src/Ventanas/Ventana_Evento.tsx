@@ -3,7 +3,15 @@ import React from "react";
 import "./Ventana_Evento.css";
 import Banner from "../Banner/Banner";
 
-export default class Ventana_Evento extends React.Component<{}> {
+interface Props{
+  setActive:(input:string) => void
+}
+
+export default class Ventana_Evento extends React.Component<Props,{}> {
+  constructor(props: Props) {
+    super(props)
+  }
+
   render(): JSX.Element {
     return (
       <>
@@ -26,9 +34,9 @@ export default class Ventana_Evento extends React.Component<{}> {
               </div>
               <div className="formulario">
                 {/* <!-- Aqui va la lista de resultados de consulta --> */}
-                <label className="titulo">INFORMATION ABOUT YOUR EVENT</label>
+                <label className="information">INFORMATION ABOUT YOUR EVENT</label>
                 <div>
-                  <label className="nombre" id="etiquetaName">
+                  <label className="nombre_ev" id="etiquetaName">
                     Name{" "}
                   </label>
                   <input className="inputName" id="inputName" />
@@ -65,6 +73,7 @@ export default class Ventana_Evento extends React.Component<{}> {
                   className="button_create"
                   type="button"
                   id="button_create"
+                  onClick={() => this.props.setActive("BUSQUEDA")}
                 >
                   <a
                     className="link"

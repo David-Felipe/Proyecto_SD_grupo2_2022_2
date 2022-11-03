@@ -3,7 +3,15 @@ import React from "react";
 import "./Ventana_registro.css";
 import Banner from "../Banner/Banner";
 
-export default class Ventana_registro extends React.Component<{}> {
+interface Props {
+  setActive: (input: string) => void;
+}
+
+export default class Ventana_registro extends React.Component<Props, {}> {
+  constructor(props: Props) {
+    super(props);
+  }
+
   render(): JSX.Element {
     return (
       <section className="home">
@@ -63,7 +71,11 @@ export default class Ventana_registro extends React.Component<{}> {
                 />
                 <br></br>
               </div>
-              <button type="button" className="button_register">
+              <button
+                type="button"
+                className="button_register"
+                onClick={() => this.props.setActive("INICIO")}
+              >
                 <a
                   href="D:\Desktop\juanXo\U\2022 - 2S\Estructuras de datos\Proyecto\Mockups Interfaz\Ventana de inicio\Ventana_De_Inicio.html"
                   className="register"

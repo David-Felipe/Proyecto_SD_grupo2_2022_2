@@ -138,7 +138,11 @@ h1{
     color: #000000;
 }
 
-.titulo{
+.Editar:hover{
+    background-color: #197090;
+}
+
+.titulo_information{
     position: absolute;
     width: 558px;
     height: 18px;
@@ -157,7 +161,7 @@ h1{
     color: #000000;
 }
 
-.nombre{
+.nombre_p{
     position: absolute;
     width: 203.92px;
     height: 42.97px;
@@ -184,7 +188,7 @@ h1{
     background: #F8F4F4;
 }
 
-.apellido{
+.apellido_p{
     position: absolute;
     width: 203.92px;
     height: 42.97px;
@@ -211,7 +215,7 @@ h1{
     background: #F8F4F4;
 }
 
-.correo{
+.correo_p{
     position: absolute;
     width: 203.92px;
     height: 42.97px;
@@ -238,7 +242,7 @@ h1{
     background: #F8F4F4;
 }
 
-.username{
+.username_p{
     position: absolute;
     width: 203.92px;
     height: 42.97px;
@@ -258,14 +262,14 @@ h1{
 
 .input_username{
     position: absolute;
-    width: 520.14px;
-    height: 33.98px;
-    left: 400px;
+    width: 450px;
+    height: 34px;
+    left: 322px;
 
     background: #F8F4F4;
 }
 
-.contraseña{
+.contraseña_p{
     position: absolute;
     width: 203.92px;
     height: 42.97px;
@@ -292,7 +296,7 @@ h1{
     background: #F8F4F4;
 }
 
-.confirm_contraseña{
+.confirm_contraseña_p{
     position: absolute;
     width: 303.92px;
     height: 42.97px;
