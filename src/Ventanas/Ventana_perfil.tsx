@@ -50,9 +50,14 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
     return (
       <section className="home">
         {/* <!-- Aqui va lo que es el banner unicamente --> */}
-        <Banner />
+        <Banner setActive={this.props.setActive} />
         {/* <!-- Aqui va el resto --> */}
         <div className="informacion">
+          <img
+            className="arrow_p"
+            src="./Arrow 2.png"
+            onClick={() => this.props.setActive("BUSQUEDA")}
+          />
           <img
             className="foto"
             src="./image_2022-10-01_182055546.png"

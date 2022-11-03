@@ -258,6 +258,10 @@ h1 {
   color: #000000;
 }
 
+.button_register:hover{
+  background-color: #197090
+}
+
 .register {
   color: #000000;
   text-decoration: none;

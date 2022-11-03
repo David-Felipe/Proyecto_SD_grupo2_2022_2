@@ -1,5 +1,5 @@
 // Ventana para mostrar los eventos cercanos y sus caracteristicas.
-import React from "react";
+import React,{ChangeEvent} from "react";
 import "./Ventana_bev.css";
 import Banner from "../Banner/Banner";
 
@@ -13,11 +13,15 @@ export default class Ventana_bev extends React.Component<Props, {}> {
     super(props);
   }
 
+  changeConfirmPassword = (e: ChangeEvent) => {
+    this.setState({ confirm_password: (e.target as HTMLInputElement).value });
+  };
+
   render(): JSX.Element {
     return (
       <section className="home">
         {/* <!-- Aqui va lo que es el banner unicamente --> */}
-        <Banner />
+        <Banner setActive={this.props.setActive}/>
         {/* <!-- Aqui va el resto --> */}
         <div className="Content">
           <div>

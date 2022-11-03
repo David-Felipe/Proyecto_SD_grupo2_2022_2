@@ -71,7 +71,7 @@ h1{
     color: #F8F5E7;
 }
 
-/* Esta la imagen con las dimensiones sacadas del mismo figma */
+/* Esta la imagen con las dimensiones sacadas del mismo figma
 .icono{
     position: absolute;
     width: 135px;
@@ -80,7 +80,7 @@ h1{
     top: 0px;
 
     background:none;
-}
+} */
 
 .informacion{
     box-sizing: border-box;
@@ -322,3 +322,15 @@ h1{
 
     background: #F8F4F4;
 }
+
+.arrow_p{
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    left: 50px;
+    top: 20px;
+  }
+  
+  .arrow_p:hover{
+    transform:scale(1.5);
+  }

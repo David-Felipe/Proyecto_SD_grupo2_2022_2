@@ -3,24 +3,45 @@ import React from "react";
 import "./Ventana_Evento.css";
 import Banner from "../Banner/Banner";
 
-interface Props{
-  setActive:(input:string) => void
+interface Props {
+  setActive: (input: string) => void;
 }
 
-export default class Ventana_Evento extends React.Component<Props,{}> {
+interface Evento {
+  name: string;
+  address: string;
+  time_begin: Date;
+  time_end: Date;
+  thematics: String[];
+}
+
+export default class Ventana_Evento extends React.Component<Props, {}> {
   constructor(props: Props) {
-    super(props)
+    super(props);
   }
+
+  evento: Evento = {
+    name: "PARTIDO",
+    address: "CAllE xxx",
+    time_begin: new Date(2012, 1, 31, 23, 59, 59),
+    time_end: new Date(2012, 1, 31, 23, 59, 59),
+    thematics: ["FUTBOL"],
+  };
 
   render(): JSX.Element {
     return (
       <>
         <section className="home">
           {/* <!-- Aqui va lo que es el banner unicamente --> */}
-          <Banner />
+          <Banner setActive={this.props.setActive} />
           {/* <!-- Aqui va el resto --> */}
           <div className="Content">
             <div>
+              <img
+                className="arrow"
+                src="./Arrow 2.png"
+                onClick={() => this.props.setActive("BUSQUEDA")}
+              />
               <div className="mapa">
                 {/* <!-- Aqui va implementado el mapa --> */}
                 <iframe
@@ -34,36 +55,58 @@ export default class Ventana_Evento extends React.Component<Props,{}> {
               </div>
               <div className="formulario">
                 {/* <!-- Aqui va la lista de resultados de consulta --> */}
-                <label className="information">INFORMATION ABOUT YOUR EVENT</label>
+                <label className="information">
+                  INFORMATION ABOUT YOUR EVENT
+                </label>
                 <div>
                   <label className="nombre_ev" id="etiquetaName">
                     Name{" "}
                   </label>
-                  <input className="inputName" id="inputName" />
+                  <input
+                    className="inputName"
+                    id="inputName"
+                    value={this.evento.name}
+                  />
                   <br></br>
                 </div>
                 <div>
                   <label className="direccion" id="etiquetaAddress">
                     Address{" "}
                   </label>
-                  <input className="inputAddress" id="inputAddress" />
+                  <input
+                    className="inputAddress"
+                    id="inputAddress"
+                    value={this.evento.address}
+                  />
                   <br></br>
                 </div>
                 <div>
                   <label className="tiempo" id="etiquetaTime">
                     Time{" "}
                   </label>
-                  <input className="inputTime_begin" id="inputTime_begin" />
+                  <input
+                    className="inputTime_begin"
+                    id="inputTime_begin"
+                    value={this.evento.time_begin.toDateString()}
+                  />
                   <br></br>
                 </div>
-                <input className="inputTime_end" id="inputTime_end" />
+                <input
+                  className="inputTime_end"
+                  id="inputTime_end"
+                  value={this.evento.time_begin.toDateString()}
+                />
                 <br></br>
                 <div>
                   <div>
                     <label className="tematica" id="etiquetaThematics">
                       Thematics{" "}
                     </label>
-                    <input className="inputThematics" id="inputThematics" />
+                    <input
+                      className="inputThematics"
+                      id="inputThematics"
+                      value={"FUTBOL"}
+                    />
                     <br></br>
                   </div>
                   <input className="inputThematics1" id="inputThematics" />

@@ -36,7 +36,7 @@ export default class App extends React.Component<{}, State> {
       // INICIO - VENTANA EMERGENTE - REGISTRO (conectadas)
       // EDITAR - PERFIL (conectadas)
       // BUSQUEDA - EVENTO (conectadas)
-      active: "INICIO"
+      active: "BUSQUEDA"
     };
   }
 
