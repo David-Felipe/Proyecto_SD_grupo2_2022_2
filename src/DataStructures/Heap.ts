@@ -1,9 +1,9 @@
 // clase monticulo, para mas informacion sobre monticulos consultar: https://www.youtube.com/watch?v=t0Cq6tVNRBA
-class Heap {
+class Heap<T> {
     private maxSize: number;
     private size: number;
     private id_array: number[];
-    private data_array: string[];
+    private data_array: T[];
     constructor (maxSize: number) {
         //valores iniciales
         //tamano maximo del monticulo:
@@ -15,7 +15,7 @@ class Heap {
         // array de los datos anexados a los ids del monticulo
         this.data_array= [];
     }
-    //
+    //s
     //
     //funcionalidades nucleo: (metodos que son necesarios para el correcto funcionamiento del monticulo)
     //
@@ -81,7 +81,7 @@ class Heap {
     //
     //
     // inserta un valor en ambos arrays (el dato y su id)
-    insert(id: number,data: string){
+    insert(id: number,data: T){
         // si el array esta lleno se deja como esta.
         if (this.size==this.maxSize){
             return console.log("no hay espacio")
