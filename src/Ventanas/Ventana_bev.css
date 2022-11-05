@@ -45,14 +45,14 @@
     background-color: #197090;
 }
 
-.mapa{
+.mapa_bev{
     box-sizing: border-box;
 
     position: absolute;
     width: 709px;
     height: 700px;
     left: 65px;
-    top: 0px;
+    top: 226px;
     border: 5px solid #000000;
     border-radius: 32px;
 }
