@@ -3,6 +3,8 @@ import React, { ChangeEvent } from "react";
 import "./Ventana_perfil.css";
 import Perfil from "../Interface/InterfacePerfil";
 import Banner from "Banner/Banner";
+import Evento_comp_p from "./Mostrar evento/Evento_per";
+import Evento from "../Interface/InterfaceEvento";
 
 interface Props {
   perfil: Perfil;
@@ -15,6 +17,29 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
     super(props);
     this.state = this.props.perfil;
   }
+
+  evento: Evento = {
+    name: "PARTIDO",
+    distancia: 1,
+    address: "CAllE xxx",
+    time_begin: new Date(2012, 1, 31, 23, 59, 59),
+    time_end: new Date(2012, 1, 31, 23, 59, 59),
+    thematics: [
+      "FUTBOL",
+      "BASKETBALL",
+      "BEISBALL",
+      "BEISBALL",
+      "BEISBALL",
+      "BEISBALL",
+    ],
+  };
+
+  arrayEvento: Evento[] = [
+    this.evento,
+    this.evento,
+    this.evento,
+    this.evento
+  ];
 
   edit = (input: string) => {
     this.props.edit(this.state);
@@ -153,8 +178,13 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
           </form>
         </div>
         <div className="eventos">
+          <br></br>
           {/* <!-- Aqui va el consumo de servicios de los eventos. --> */}
+          {this.arrayEvento.map((minievent) => (
+            <Evento_comp_p evento={minievent} />
+          ))}
         </div>
+        <div></div>
       </section>
     );
   }

@@ -1,7 +1,7 @@
 // Ventana para mostrar los eventos cercanos y sus caracteristicas.
 import React, { ChangeEvent } from "react";
 import "./Ventana_bev.css";
-import Evento_comp from "./Mostrar evento/Evento";
+import Evento_comp from "./Mostrar evento/Evento_bev";
 import Evento from "../Interface/InterfaceEvento";
 import Banner from "../Banner/Banner";
 

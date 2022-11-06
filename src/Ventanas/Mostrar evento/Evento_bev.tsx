@@ -1,5 +1,5 @@
 import React from "react";
-import "./Evento.css";
+import "./Evento_bev.css";
 import Evento from "../../Interface/InterfaceEvento";
 
 interface Props {

@@ -1,0 +1,71 @@
+.contenido_ev{
+    position: absolute;
+    width: 1268px;
+    height: 107.77px;
+    left: 43px;
+    background-color: aliceblue;
+    border-color: black;
+    border: 1px solid;
+    border-radius: 30px;
+    overflow:scroll
+
+}
+
+.contenido_ev::-webkit-scrollbar{
+    visibility:hidden;
+}
+
+.fragmento{
+    position: relative;
+    height: fit-content;
+    width: max-content;
+    left: 12px;
+}
+
+.EVENTO{
+    position: absolute;
+    width: 505.32px;
+    height: 18.21px;
+    left: 71.43px;
+}
+
+.name_evento_per{
+    
+    position: absolute;
+    width: 505.32px;
+    height: 18.21px;
+    left: 171.43px;
+}
+
+.address_evento{
+    position: absolute;
+    width: 300px;
+    left: 126px;
+}
+
+.begin{
+    position: absolute;
+    left: 126px;
+}
+
+.time_begin{
+    position: absolute;
+    left: 183px;
+}
+
+.end{
+    position: absolute;
+    left: 258px;
+}
+
+.time_end{
+    position: absolute;
+    left: 298px;
+}
+
+.thematics{
+    position: absolute;
+    width: 261px;
+    height: 16.19px;
+    left: 126px;
+}
