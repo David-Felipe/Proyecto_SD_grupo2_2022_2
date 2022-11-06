@@ -1,9 +1,6 @@
 
 //------------------------------------------Mini eventos------------------------------------------------------
 
-//Heap de MiniEventos
-let heapMiniEventos = new Heap(1000);
-
 //Metodo de creacion de minieventos
 function crearMiniEvento(nombre : string, hora: number, tematica: string) {
 
