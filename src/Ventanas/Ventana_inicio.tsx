@@ -9,7 +9,7 @@ interface State {
 }
 
 interface Props {
-  setActive: (input: string) => void;
+  setActive: (input: string,retorno:any) => void;
 }
 
 export class Ventana_inicio extends React.Component<Props, State> {
@@ -67,7 +67,7 @@ export class Ventana_inicio extends React.Component<Props, State> {
                 <button
                   type="button"
                   className="button_singin"
-                  onClick={() => this.props.setActive("REGISTRO")}
+                  onClick={() => this.props.setActive("REGISTRO","")}
                 >
                   <a
                     href="D:\Desktop\juanXo\U\2022 - 2S\Estructuras de datos\Proyecto\Mockups Interfaz\Ventana de Registro\Registro.html"

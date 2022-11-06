@@ -36,11 +36,6 @@
     text-align: center;
 }
 
-.text_button{
-    color: #000000;
-    text-decoration: none;
-}
-
 .button_ev:hover{
     background-color: #197090;
 }

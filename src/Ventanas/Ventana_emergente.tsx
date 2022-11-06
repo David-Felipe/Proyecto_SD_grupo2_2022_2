@@ -3,7 +3,7 @@ import "./Ventana_emergente.css";
 
 interface Props {
   changeShowError: (condition: boolean) => void;
-  setActive: (input: string) => void;
+  setActive: (input: string, retorno:any) => void;
 }
 
 export class Ventana_emergente extends React.Component<Props, {}> {
@@ -22,7 +22,7 @@ export class Ventana_emergente extends React.Component<Props, {}> {
             </label>
             <button
               className="button_yes"
-              onClick={() => this.props.setActive("REGISTRO")}
+              onClick={() => this.props.setActive("REGISTRO","")}
             >
               SI
             </button>

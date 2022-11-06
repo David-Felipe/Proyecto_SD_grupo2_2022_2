@@ -6,7 +6,7 @@ import Evento from "../Interface/InterfaceEvento";
 import Banner from "../Banner/Banner";
 
 interface Props {
-  setActive: (input: string) => void;
+  setActive: (input: string,retorno:any) => void;
 }
 
 export default class Ventana_bev extends React.Component<Props, {}> {
@@ -59,7 +59,7 @@ export default class Ventana_bev extends React.Component<Props, {}> {
         <button
           type="button"
           className="button_ev"
-          onClick={() => this.props.setActive("EVENTO")}
+          onClick={() => this.props.setActive("EVENTO","")}
         >
           CREATE YOUR EVENT
         </button>

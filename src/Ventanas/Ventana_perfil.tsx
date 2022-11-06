@@ -9,7 +9,7 @@ import Evento from "../Interface/InterfaceEvento";
 interface Props {
   perfil: Perfil;
   edit: (perfil: Perfil) => void;
-  setActive: (input: string) => void;
+  setActive: (input: string,retorno:any) => void;
 }
 
 export default class Ventana_perfil extends React.Component<Props, Perfil> {
@@ -41,9 +41,8 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
     this.evento
   ];
 
-  edit = (input: string) => {
+  edit = () => {
     this.props.edit(this.state);
-    this.props.setActive(input);
     console.log(this.state);
     // codigo para editar y cambiar de ventana juntas las funciones
   };
@@ -81,7 +80,7 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
           <img
             className="arrow_p"
             src="./Arrow 2.png"
-            onClick={() => this.props.setActive("BUSQUEDA")}
+            onClick={() => this.props.setActive("BUSQUEDA","")}
           />
           <img
             className="foto"
@@ -91,7 +90,7 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
           <button
             className="Editar"
             type="button"
-            onClick={() => this.edit("EDITAR")}
+            onClick={() => this.edit()}
           >
             Edit
           </button>
@@ -181,7 +180,7 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
           <br></br>
           {/* <!-- Aqui va el consumo de servicios de los eventos. --> */}
           {this.arrayEvento.map((minievent) => (
-            <Evento_comp_p evento={minievent} />
+            <Evento_comp_p evento={minievent} setActive={this.props.setActive} />
           ))}
         </div>
         <div></div>

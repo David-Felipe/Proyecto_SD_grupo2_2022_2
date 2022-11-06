@@ -2,7 +2,7 @@ import React from "react";
 import "./Banner.css";
 
 interface Props {
-  setActive: (input: string) => void;
+  setActive: (input: string,retorno:any) => void;
 }
 
 export default class Banner extends React.Component<Props, {}> {
@@ -19,7 +19,7 @@ export default class Banner extends React.Component<Props, {}> {
         </label>
         <button
           className="icono"
-          onClick={() => this.props.setActive("PERFIL")}
+          onClick={() => this.props.setActive("PERFIL","")}
         >
           <img className="iconoImg" src="./image_2022-10-01_182055546.png" />
         </button>

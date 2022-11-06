@@ -4,7 +4,7 @@ import "./Ventana_registro.css";
 import Banner from "../Banner/Banner";
 
 interface Props {
-  setActive: (input: string) => void;
+  setActive: (input: string,retorno:any) => void;
 }
 
 export default class Ventana_registro extends React.Component<Props, {}> {
@@ -74,7 +74,7 @@ export default class Ventana_registro extends React.Component<Props, {}> {
               <button
                 type="button"
                 className="button_register"
-                onClick={() => this.props.setActive("INICIO")}
+                onClick={() => this.props.setActive("INICIO","")}
               >
                 <a
                   href="D:\Desktop\juanXo\U\2022 - 2S\Estructuras de datos\Proyecto\Mockups Interfaz\Ventana de inicio\Ventana_De_Inicio.html"

@@ -13,6 +13,8 @@ interface State {
 }
 
 export default class App extends React.Component<{}, State> {
+  retorno:any = "hola";
+
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -37,8 +39,9 @@ export default class App extends React.Component<{}, State> {
     console.log(this.state);
   };
 
-  setActive = (input: string) => {
+  setActive = (input: string,objeto:any) => {
     this.setState({ active: input });
+    this.retorno = objeto
   };
 
   render(): JSX.Element {
@@ -70,7 +73,7 @@ export default class App extends React.Component<{}, State> {
         ventana = <Ventana_bev setActive={this.setActive} />;
         break;
       case "EDITAR":
-        ventana = <Ventana_dev setActive={this.setActive} />;
+        ventana = <Ventana_dev setActive={this.setActive} evento={this.retorno}/>;
         break;
     }
 

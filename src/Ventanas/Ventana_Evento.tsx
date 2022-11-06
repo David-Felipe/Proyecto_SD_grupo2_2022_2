@@ -5,7 +5,7 @@ import Banner from "../Banner/Banner";
 import Evento from "../Interface/InterfaceEvento";
 
 interface Props {
-  setActive: (input: string) => void;
+  setActive: (input: string,retorno:any) => void;
 }
 
 export default class Ventana_Evento extends React.Component<Props, {}> {
@@ -34,7 +34,7 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
               <img
                 className="arrow"
                 src="./Arrow 2.png"
-                onClick={() => this.props.setActive("BUSQUEDA")}
+                onClick={() => this.props.setActive("BUSQUEDA","")}
               />
               <div className="mapa">
                 {/* <!-- Aqui va implementado el mapa --> */}
@@ -110,7 +110,7 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
                   className="button_create"
                   type="button"
                   id="button_create"
-                  onClick={() => this.props.setActive("BUSQUEDA")}
+                  onClick={() => this.props.setActive("BUSQUEDA","")}
                 >
                   CREATE
                 </button>
