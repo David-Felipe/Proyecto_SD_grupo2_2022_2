@@ -12,6 +12,9 @@ interface State {
   active: string;
 }
 
+//Heap de MiniEventos
+let heapMiniEventos = new Heap(1000);
+
 export default class App extends React.Component<{}, State> {
   retorno:any = "hola";
 
