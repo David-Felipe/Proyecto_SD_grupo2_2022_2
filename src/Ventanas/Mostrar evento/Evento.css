@@ -1,0 +1,37 @@
+.contenido{
+    width: 405.71px;
+    background-color: aliceblue;
+    border-color: black;
+    border: 1px solid;
+    border-radius: 5px;
+}
+
+.distancia_evento{
+    position: absolute;
+    left: 300px;
+}
+
+.km{
+    position:relative;
+    left: 200px;
+}
+
+.begin{
+    position: absolute;
+    left: 153.86px;
+}
+
+.time_begin{
+    position: absolute;
+    left: 210px;
+}
+
+.end{
+    position: absolute;
+    left: 285px;
+}
+
+.time_end{
+    position: absolute;
+    left: 325px;
+}

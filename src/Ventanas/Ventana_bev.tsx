@@ -1,6 +1,8 @@
 // Ventana para mostrar los eventos cercanos y sus caracteristicas.
-import React,{ChangeEvent} from "react";
+import React, { ChangeEvent } from "react";
 import "./Ventana_bev.css";
+import Evento_comp from "./Mostrar evento/Evento";
+import Evento from "../Interface/InterfaceEvento";
 import Banner from "../Banner/Banner";
 
 interface Props {
@@ -8,20 +10,26 @@ interface Props {
 }
 
 export default class Ventana_bev extends React.Component<Props, {}> {
-  
   constructor(props: Props) {
     super(props);
   }
 
-  changeConfirmPassword = (e: ChangeEvent) => {
-    this.setState({ confirm_password: (e.target as HTMLInputElement).value });
+  evento: Evento = {
+    name: "PARTIDO",
+    distancia: 1,
+    address: "CAllE xxx",
+    time_begin: new Date(2012, 1, 31, 23, 59, 59),
+    time_end: new Date(2012, 1, 31, 23, 59, 59),
+    thematics: ["FUTBOL", "BASKETBALL", "BEISBALL", "BEISBALL", "BEISBALL"],
   };
+
+  arrayEvento: Evento[] = [this.evento, this.evento, this.evento, this.evento, this.evento, this.evento, this.evento, this.evento, this.evento, this.evento];
 
   render(): JSX.Element {
     return (
       <section className="home">
         {/* <!-- Aqui va lo que es el banner unicamente --> */}
-        <Banner setActive={this.props.setActive}/>
+        <Banner setActive={this.props.setActive} />
         {/* <!-- Aqui va el resto --> */}
         <div className="Content">
           <div>
@@ -39,6 +47,11 @@ export default class Ventana_bev extends React.Component<Props, {}> {
             <div className="consultas">
               <label className="events">EVENTS CLOSE TO YOU</label>
               {/* <!-- Aqui va la lista de resultados de consulta --> */}
+              <div className="contenedor_busquedas">
+                {this.arrayEvento.map((event) => (
+                  <Evento_comp evento={event} />
+                ))}
+              </div>
               <div></div>
             </div>
           </div>
@@ -48,12 +61,7 @@ export default class Ventana_bev extends React.Component<Props, {}> {
           className="button_ev"
           onClick={() => this.props.setActive("EVENTO")}
         >
-          <a
-            href="D:\Desktop\juanXo\U\2022 - 2S\Estructuras de datos\Proyecto\Mockups Interfaz\Ventana Evento\Ventana Evento.html"
-            className="text_button"
-          >
-            CREATE YOUR EVENT
-          </a>
+          CREATE YOUR EVENT
         </button>
       </section>
     );

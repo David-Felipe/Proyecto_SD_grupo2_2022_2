@@ -5,15 +5,7 @@ import Ventana_Evento from "./Ventanas/Ventana_Evento";
 import Ventana_perfil from "./Ventanas/Ventana_perfil";
 import Ventana_registro from "./Ventanas/Ventana_registro";
 import Ventana_inicio from "./Ventanas/Ventana_inicio";
-
-export interface Perfil {
-  name: string;
-  lastname: string;
-  email: string;
-  username: string;
-  password: string;
-  confirm_password: string;
-}
+import Perfil from "./Interface/InterfacePerfil";
 
 interface State {
   perfil_atributo: Perfil;
@@ -36,7 +28,7 @@ export default class App extends React.Component<{}, State> {
       // INICIO - VENTANA EMERGENTE - REGISTRO (conectadas)
       // EDITAR - PERFIL (conectadas)
       // BUSQUEDA - EVENTO (conectadas)
-      active: "BUSQUEDA"
+      active: "BUSQUEDA",
     };
   }
 
@@ -45,41 +37,43 @@ export default class App extends React.Component<{}, State> {
     console.log(this.state);
   };
 
-  setActive = (input:string) =>{
-    this.setState({active:input})
-  }
+  setActive = (input: string) => {
+    this.setState({ active: input });
+  };
 
   render(): JSX.Element {
     let ventana: JSX.Element;
-    ventana = <Ventana_inicio setActive={this.setActive}/>
+    ventana = <Ventana_inicio setActive={this.setActive} />;
 
     let active = this.state.active;
 
-    switch(active){
+    switch (active) {
       case "INICIO":
-        ventana = <Ventana_inicio setActive={this.setActive}/>
-        break
+        ventana = <Ventana_inicio setActive={this.setActive} />;
+        break;
       case "REGISTRO":
-        ventana = <Ventana_registro setActive={this.setActive}/>
-        break
+        ventana = <Ventana_registro setActive={this.setActive} />;
+        break;
       case "PERFIL":
-        ventana = <Ventana_perfil perfil={this.state.perfil_atributo} edit={this.setPerfil} setActive={this.setActive}/>
-        break
+        ventana = (
+          <Ventana_perfil
+            perfil={this.state.perfil_atributo}
+            edit={this.setPerfil}
+            setActive={this.setActive}
+          />
+        );
+        break;
       case "EVENTO":
-        ventana = <Ventana_Evento setActive={this.setActive}/>
-        break
+        ventana = <Ventana_Evento setActive={this.setActive} />;
+        break;
       case "BUSQUEDA":
-        ventana = <Ventana_bev setActive={this.setActive}/>
-        break
+        ventana = <Ventana_bev setActive={this.setActive} />;
+        break;
       case "EDITAR":
-        ventana = <Ventana_dev setActive={this.setActive}/>
-        break
+        ventana = <Ventana_dev setActive={this.setActive} />;
+        break;
     }
 
-    return (
-      <>
-        {ventana}
-      </>
-    );
+    return <>{ventana}</>;
   }
 }

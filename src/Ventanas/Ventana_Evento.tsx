@@ -2,17 +2,10 @@
 import React from "react";
 import "./Ventana_Evento.css";
 import Banner from "../Banner/Banner";
+import Evento from "../Interface/InterfaceEvento";
 
 interface Props {
   setActive: (input: string) => void;
-}
-
-interface Evento {
-  name: string;
-  address: string;
-  time_begin: Date;
-  time_end: Date;
-  thematics: String[];
 }
 
 export default class Ventana_Evento extends React.Component<Props, {}> {
@@ -22,10 +15,11 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
 
   evento: Evento = {
     name: "PARTIDO",
+    distancia: 10,
     address: "CAllE xxx",
     time_begin: new Date(2012, 1, 31, 23, 59, 59),
     time_end: new Date(2012, 1, 31, 23, 59, 59),
-    thematics: ["FUTBOL"],
+    thematics: ["FUTBOL"]
   };
 
   render(): JSX.Element {
@@ -118,12 +112,7 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
                   id="button_create"
                   onClick={() => this.props.setActive("BUSQUEDA")}
                 >
-                  <a
-                    className="link"
-                    href="D:\Desktop\juanXo\U\2022 - 2S\Estructuras de datos\Proyecto\Mockups Interfaz\Ventana bev\Ventana buscar.html"
-                  >
-                    CREATE
-                  </a>
+                  CREATE
                 </button>
               </div>
             </div>
