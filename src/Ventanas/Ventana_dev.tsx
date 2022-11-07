@@ -1,5 +1,5 @@
 // Ventana a la que se dirige para editar los eventos.
-import React from "react";
+import React,{ChangeEvent} from "react";
 import "./Ventana_dev.css";
 import Banner from "../Banner/Banner";
 import Evento from "../Interface/InterfaceEvento";
@@ -7,12 +7,45 @@ import Evento from "../Interface/InterfaceEvento";
 interface Props {
   setActive: (input: string, retorno: any) => void;
   evento: Evento;
+  edit: (evento: Evento) => void;
 }
 
-export default class Ventana_dev extends React.Component<Props, {}> {
+export default class Ventana_dev extends React.Component<Props, Evento> {
+  time_begin_current: string = "";
+  time_end_current: string = "";
+  new_thematic: string = "";
+
+
   constructor(props: Props) {
     super(props);
+    this.setState(this.props.evento)
   }
+
+  add = () => {
+    var thematic: string[] = this.props.evento.thematics;
+    thematic.push(this.new_thematic);
+    this.setState({thematics:thematic});
+  };
+
+  changeName = (e: ChangeEvent) => {
+    this.setState( {name : (e.target as HTMLInputElement).value});
+  };
+
+  changeAddress = (e: ChangeEvent) => {
+    this.setState ({address : (e.target as HTMLInputElement).value});
+  };
+
+  changeTimeBegin = (e: ChangeEvent) => {
+    this.time_begin_current = (e.target as HTMLInputElement).value;
+  };
+
+  changeTimeEnd = (e: ChangeEvent) => {
+    this.time_end_current = (e.target as HTMLInputElement).value;
+  };
+
+  changeThematics = (e: ChangeEvent) => {
+    this.new_thematic = (e.target as HTMLInputElement).value;
+  };
 
   render(): JSX.Element {
     return (
@@ -49,6 +82,7 @@ export default class Ventana_dev extends React.Component<Props, {}> {
                   className="inputName"
                   id="inputName"
                   value={this.props.evento.name}
+                  onChange={this.changeName}
                 ></input>
                 <br></br>
               </div>
@@ -60,6 +94,7 @@ export default class Ventana_dev extends React.Component<Props, {}> {
                   className="inputAddress"
                   id="inputAddress"
                   value={this.props.evento.address}
+                  onChange={this.changeAddress}
                 ></input>
                 <br></br>
               </div>
@@ -71,6 +106,7 @@ export default class Ventana_dev extends React.Component<Props, {}> {
                   className="inputTime_begin"
                   id="inputTime_begin"
                   value={this.props.evento.time_begin.toDateString()}
+                  onChange={this.changeTimeBegin}
                 ></input>
                 <br></br>
               </div>
@@ -78,6 +114,7 @@ export default class Ventana_dev extends React.Component<Props, {}> {
                 className="inputTime_end"
                 id="inputTime_end"
                 value={this.props.evento.time_end.toDateString()}
+                onChange={this.changeTimeEnd}
               ></input>
               <br></br>
               <div>
@@ -88,22 +125,25 @@ export default class Ventana_dev extends React.Component<Props, {}> {
                   <input
                     className="inputThematics"
                     id="inputThematics"
-                    value={"FUTBOL"}
+                    onChange={this.changeThematics}
                   ></input>
                   <br></br>
                 </div>
-                <input
-                  className="inputThematics1"
-                  id="inputThematics"
-                  value={this.props.evento.thematics[1]}
-                ></input>
+                <button
+                    type="button"
+                    className="buttonThematics"
+                    id="inputThematics"
+                    onClick={this.add}
+                  >
+                    Add
+                  </button>
                 <br></br>
               </div>
               <button
                 className="button_create"
                 type="button"
                 id="button_create"
-                onClick={() => this.props.setActive("PERFIL", "")}
+                onClick={() => this.props.edit(this.state)}
               >
                 EDIT
               </button>

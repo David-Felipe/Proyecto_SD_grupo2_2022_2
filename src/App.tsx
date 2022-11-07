@@ -89,10 +89,15 @@ export default class App extends React.Component<{}, State> {
 
   delete_ev = (evento: Evento) => {
     //Codigo para eleiminar un evento teniendo el evento completo con sus atributos
-  }
+  };
+
+  setEvent = (evento: Evento) => {
+    //Aqui va el codigo que edita un evento recibiendo el mismo evento editado
+    this.setActive("PERFIL", "");
+  };
 
   setPerfil = (perfil: Perfil) => {
-    //Aqui va el codigo para editar un perfil y la entrada de este metodo 
+    //Aqui va el codigo para editar un perfil y la entrada de este metodo
     //es un perfil con todos sus atributos
   };
 
@@ -155,7 +160,11 @@ export default class App extends React.Component<{}, State> {
         break;
       case "EDITAR":
         ventana = (
-          <Ventana_dev setActive={this.setActive} evento={this.retorno} />
+          <Ventana_dev
+            setActive={this.setActive}
+            evento={this.retorno}
+            edit={this.setEvent}
+          />
         );
         break;
     }
