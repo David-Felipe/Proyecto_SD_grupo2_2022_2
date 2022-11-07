@@ -236,15 +236,19 @@
   border-radius: 22px;
 }
 
-.inputThematics1 {
+.buttonThematics {
   position: absolute;
   width: 251px;
   height: 37px;
   left: 180px;
   top: 449px;
 
-  background: #f9f9f9;
+  background: #8a8787;
   border-radius: 22px;
+}
+
+.buttonThematics:hover{
+  background-color: #373434;
 }
 
 .button_create {

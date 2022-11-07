@@ -1,14 +1,19 @@
 // Ventana donde se redirecciona para crear eventos
-import React,{ChangeEvent} from "react";
+import React, { ChangeEvent } from "react";
 import "./Ventana_Evento.css";
 import Banner from "../Banner/Banner";
 import Evento from "../Interface/InterfaceEvento";
 
 interface Props {
-  setActive: (input: string,retorno:any) => void;
+  setActive: (input: string, retorno: any) => void;
+  create_ev: (evento: Evento) => void;
 }
 
-export default class Ventana_Evento extends React.Component<Props, Evento> {
+export default class Ventana_Evento extends React.Component<Props, {}> {
+  time_begin_current: string = "";
+  time_end_current: string = "";
+  new_thematic: string = "";
+
   constructor(props: Props) {
     super(props);
   }
@@ -19,28 +24,40 @@ export default class Ventana_Evento extends React.Component<Props, Evento> {
     address: "CAllE xxx",
     time_begin: new Date(2012, 1, 31, 23, 59, 59),
     time_end: new Date(2012, 1, 31, 23, 59, 59),
-    thematics: ["FUTBOL"]
+    thematics: ["FUTBOL"],
   };
 
-  // changeName = (e: ChangeEvent) => {
-  //   this.setState({ name: (e.target as HTMLInputElement).value });
-  // };
+  create = () => {
+    var date1 = new Date(this.time_begin_current);
+    var date2 = new Date(this.time_end_current);
+    this.evento.time_begin = date1;
+    this.evento.time_end = date2;
+    this.props.create_ev(this.evento);
+  };
 
-  // changeAddress = (e: ChangeEvent) => {
-  //   this.setState({ address: (e.target as HTMLInputElement).value });
-  // };
+  add = () => {
+    this.evento.thematics.push(this.new_thematic);
+  };
 
-  // changeTimeBegin = (e: ChangeEvent) => {
-  //   this.setState({ time_begin: (e.target as HTMLInputElement).value });
-  // };
+  changeName = (e: ChangeEvent) => {
+    this.evento.name = (e.target as HTMLInputElement).value;
+  };
 
-  // changeTimeEnd = (e: ChangeEvent) => {
-  //   this.setState({ time_end : (Date.parse((e.target as HTMLInputElement).value))});
-  // };
+  changeAddress = (e: ChangeEvent) => {
+    this.evento.address = (e.target as HTMLInputElement).value;
+  };
 
-  // changeThematics = (e: ChangeEvent) => {
-  //   this.setState({ thematics: [(e.target as HTMLInputElement).value ]});
-  // };
+  changeTimeBegin = (e: ChangeEvent) => {
+    this.time_begin_current = (e.target as HTMLInputElement).value;
+  };
+
+  changeTimeEnd = (e: ChangeEvent) => {
+    this.time_end_current = (e.target as HTMLInputElement).value;
+  };
+
+  changeThematics = (e: ChangeEvent) => {
+    this.new_thematic = (e.target as HTMLInputElement).value;
+  };
 
   render(): JSX.Element {
     return (
@@ -54,7 +71,7 @@ export default class Ventana_Evento extends React.Component<Props, Evento> {
               <img
                 className="arrow"
                 src="./Arrow 2.png"
-                onClick={() => this.props.setActive("BUSQUEDA","")}
+                onClick={() => this.props.setActive("BUSQUEDA", "")}
               />
               <div className="mapa">
                 {/* <!-- Aqui va implementado el mapa --> */}
@@ -120,18 +137,24 @@ export default class Ventana_Evento extends React.Component<Props, Evento> {
                       className="inputThematics"
                       id="inputThematics"
                       onChange={this.changeThematics}
-                      value={"FUTBOL"}
                     />
                     <br></br>
                   </div>
-                  <input className="inputThematics1" id="inputThematics" />
+                  <button
+                    type="button"
+                    className="buttonThematics"
+                    id="inputThematics"
+                    onClick={this.add}
+                  >
+                    Add
+                  </button>
                   <br></br>
                 </div>
                 <button
                   className="button_create"
                   type="button"
                   id="button_create"
-                  onClick={() => this.props.setActive("BUSQUEDA","")}
+                  onClick={() => this.create}
                 >
                   CREATE
                 </button>

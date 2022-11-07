@@ -64,9 +64,8 @@ export default class App extends React.Component<{}, State> {
   //Se necesita una funcion que tome los minieventos y los guarde en un arreglo de Evento[]
   guardar = () => {
     //codigo para volverlos en una arreglo de Eventos llamado arrayEvento
+  };
 
-  }
-  
   //Elementos para prueba
   arrayEvento: Evento[] = [
     this.evento,
@@ -80,6 +79,11 @@ export default class App extends React.Component<{}, State> {
     this.evento,
     this.evento,
   ];
+
+  create_ev = (evento: Evento) => {
+    //codigo que crea un evento verificando tambien si existe o no y si se repite nombre
+    this.setActive("BUSQUEDA", "");
+  };
 
   setPerfil = (perfil: Perfil) => {
     this.setState({ perfil_atributo: perfil });
@@ -126,7 +130,12 @@ export default class App extends React.Component<{}, State> {
         );
         break;
       case "EVENTO":
-        ventana = <Ventana_Evento setActive={this.setActive} />;
+        ventana = (
+          <Ventana_Evento
+            setActive={this.setActive}
+            create_ev={this.create_ev}
+          />
+        );
         break;
       case "BUSQUEDA":
         ventana = (
