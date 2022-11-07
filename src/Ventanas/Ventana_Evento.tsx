@@ -1,5 +1,5 @@
 // Ventana donde se redirecciona para crear eventos
-import React from "react";
+import React,{ChangeEvent} from "react";
 import "./Ventana_Evento.css";
 import Banner from "../Banner/Banner";
 import Evento from "../Interface/InterfaceEvento";
@@ -8,7 +8,7 @@ interface Props {
   setActive: (input: string,retorno:any) => void;
 }
 
-export default class Ventana_Evento extends React.Component<Props, {}> {
+export default class Ventana_Evento extends React.Component<Props, Evento> {
   constructor(props: Props) {
     super(props);
   }
@@ -21,6 +21,26 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
     time_end: new Date(2012, 1, 31, 23, 59, 59),
     thematics: ["FUTBOL"]
   };
+
+  // changeName = (e: ChangeEvent) => {
+  //   this.setState({ name: (e.target as HTMLInputElement).value });
+  // };
+
+  // changeAddress = (e: ChangeEvent) => {
+  //   this.setState({ address: (e.target as HTMLInputElement).value });
+  // };
+
+  // changeTimeBegin = (e: ChangeEvent) => {
+  //   this.setState({ time_begin: (e.target as HTMLInputElement).value });
+  // };
+
+  // changeTimeEnd = (e: ChangeEvent) => {
+  //   this.setState({ time_end : (Date.parse((e.target as HTMLInputElement).value))});
+  // };
+
+  // changeThematics = (e: ChangeEvent) => {
+  //   this.setState({ thematics: [(e.target as HTMLInputElement).value ]});
+  // };
 
   render(): JSX.Element {
     return (
@@ -59,7 +79,7 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
                   <input
                     className="inputName"
                     id="inputName"
-                    value={this.evento.name}
+                    onChange={this.changeName}
                   />
                   <br></br>
                 </div>
@@ -70,7 +90,7 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
                   <input
                     className="inputAddress"
                     id="inputAddress"
-                    value={this.evento.address}
+                    onChange={this.changeAddress}
                   />
                   <br></br>
                 </div>
@@ -81,14 +101,14 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
                   <input
                     className="inputTime_begin"
                     id="inputTime_begin"
-                    value={this.evento.time_begin.toDateString()}
+                    onChange={this.changeTimeBegin}
                   />
                   <br></br>
                 </div>
                 <input
                   className="inputTime_end"
                   id="inputTime_end"
-                  value={this.evento.time_begin.toDateString()}
+                  onChange={this.changeTimeEnd}
                 />
                 <br></br>
                 <div>
@@ -99,6 +119,7 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
                     <input
                       className="inputThematics"
                       id="inputThematics"
+                      onChange={this.changeThematics}
                       value={"FUTBOL"}
                     />
                     <br></br>

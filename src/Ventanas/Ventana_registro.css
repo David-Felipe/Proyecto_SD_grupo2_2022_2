@@ -185,12 +185,33 @@ h1 {
   position: absolute;
 }
 
+.usuario{
+    
+  position: absolute;
+  width: 169px;
+  height: 43px;
+  left: 159px;
+  top: 398px;
+
+  font-family: 'Cabin';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 35px;
+  line-height: 43px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+}
+
 .contraseña {
   position: absolute;
   width: 169px;
   height: 43px;
   left: 161px;
-  top: 399px;
+  top: 456px;
 
   font-family: "Cabin";
   font-style: normal;
@@ -217,7 +238,7 @@ h1 {
   width: 284px;
   height: 43px;
   left: 161px;
-  top: 465px;
+  top: 528px;
 
   font-family: "Cabin";
   font-style: normal;

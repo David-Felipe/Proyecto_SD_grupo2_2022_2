@@ -1,7 +1,11 @@
 
 //------------------------------------------Mini eventos------------------------------------------------------
 
+import { LinkedList } from "DataStructures/LinkedList";
+
 //Metodo de creacion de minieventos
+
+export let heapMiniEventos = new Heap(1000);
 
 function crearMiniEvento( name: string,distancia: number,address: string,time_begin: Date,time_end: Date,thematics: string[]) {
 

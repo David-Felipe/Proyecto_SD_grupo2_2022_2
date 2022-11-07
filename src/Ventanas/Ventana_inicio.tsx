@@ -1,18 +1,23 @@
 // Ventana donde se puede decidir si registrar usuario o ingresar en uno ya registrado.
 // En esta ventana hace falta agregar la ventana emergente cuando el usuario es incorrecto, estoy en eso.
-import React from "react";
+import React, { ChangeEvent } from "react";
 import Ventana_emergente from "./Ventana_emergente";
 import "./Ventana_inicio.css";
+import Perfil from "../Interface/InterfacePerfil";
 
 interface State {
   showError: boolean;
 }
 
 interface Props {
-  setActive: (input: string,retorno:any) => void;
+  setActive: (input: string, retorno: any) => void;
+  autentication: (name: string, password: string) => void;
 }
 
 export class Ventana_inicio extends React.Component<Props, State> {
+  current_perfil_name: string = "";
+  current_perfil_password: string = "";
+
   constructor(props: Props) {
     super(props);
     this.state = { showError: false };
@@ -20,6 +25,19 @@ export class Ventana_inicio extends React.Component<Props, State> {
 
   changeShowError = (condition: boolean) => {
     this.setState({ showError: condition });
+  };
+
+  autentication = (name: string, password: string) => {
+    console.log("nombre", name);
+    this.props.autentication(name,password)
+  };
+
+  changeName = (e: ChangeEvent) => {
+    this.current_perfil_name = (e.target as HTMLInputElement).value;
+  };
+
+  changePassword = (e: ChangeEvent) => {
+    this.current_perfil_password = (e.target as HTMLInputElement).value;
   };
 
   render(): JSX.Element {
@@ -43,7 +61,11 @@ export class Ventana_inicio extends React.Component<Props, State> {
                     Username:{" "}
                   </label>
                   <br></br>
-                  <input className="input_user" id="inputUsername" />
+                  <input
+                    className="input_user"
+                    id="inputUsername"
+                    onChange={this.changeName}
+                  />
                   <br></br>
                 </div>
                 <div>
@@ -51,14 +73,23 @@ export class Ventana_inicio extends React.Component<Props, State> {
                     Password:{" "}
                   </label>
                   <br></br>
-                  <input className="input_pass" id="inputPassword" />
+                  <input
+                    className="input_pass"
+                    id="inputPassword"
+                    onChange={this.changePassword}
+                  />
                   <br></br>
                 </div>
                 <br></br>
                 <button
                   type="button"
                   className="button_login"
-                  onClick={() => this.changeShowError(true)}
+                  onClick={() =>
+                    this.autentication(
+                      this.current_perfil_name,
+                      this.current_perfil_password
+                    )
+                  }
                 >
                   LOG IN
                 </button>
@@ -67,14 +98,9 @@ export class Ventana_inicio extends React.Component<Props, State> {
                 <button
                   type="button"
                   className="button_singin"
-                  onClick={() => this.props.setActive("REGISTRO","")}
+                  onClick={() => this.props.setActive("REGISTRO", "")}
                 >
-                  <a
-                    href="D:\Desktop\juanXo\U\2022 - 2S\Estructuras de datos\Proyecto\Mockups Interfaz\Ventana de Registro\Registro.html"
-                    className="singIn"
-                  >
-                    SIGN IN
-                  </a>
+                  SIGN IN
                 </button>
               </div>
             </div>

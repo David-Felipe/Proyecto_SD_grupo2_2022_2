@@ -1,5 +1,5 @@
 // clase monticulo, para mas informacion sobre monticulos consultar: https://www.youtube.com/watch?v=t0Cq6tVNRBA
-class Heap<T> {
+export default class Heap<T> {
     private maxSize: number;
     private size: number;
     private id_array: number[];

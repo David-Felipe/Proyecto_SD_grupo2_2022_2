@@ -4,26 +4,17 @@ import "./Ventana_bev.css";
 import Evento_comp from "./Mostrar evento/Evento_bev";
 import Evento from "../Interface/InterfaceEvento";
 import Banner from "../Banner/Banner";
+import Heap from "../DataStructures/Heap";
 
 interface Props {
   setActive: (input: string,retorno:any) => void;
+  arrayEvento: Evento[]
 }
 
 export default class Ventana_bev extends React.Component<Props, {}> {
   constructor(props: Props) {
     super(props);
   }
-
-  evento: Evento = {
-    name: "PARTIDO",
-    distancia: 1,
-    address: "CAllE xxx",
-    time_begin: new Date(2012, 1, 31, 23, 59, 59),
-    time_end: new Date(2012, 1, 31, 23, 59, 59),
-    thematics: ["FUTBOL", "BASKETBALL", "BEISBALL", "BEISBALL", "BEISBALL"],
-  };
-
-  arrayEvento: Evento[] = [this.evento, this.evento, this.evento, this.evento, this.evento, this.evento, this.evento, this.evento, this.evento, this.evento];
 
   render(): JSX.Element {
     return (
@@ -46,10 +37,10 @@ export default class Ventana_bev extends React.Component<Props, {}> {
             </div>
             <div className="consultas">
               <label className="events">EVENTS CLOSE TO YOU</label>
-              {/* <!-- Aqui va la lista de resultados de consulta --> */}
+              {/* llama a una funciona que recorra la estructura que guarda los minieventos */}
               <div className="contenedor_busquedas">
-                {this.arrayEvento.map((event) => (
-                  <Evento_comp evento={event} />
+                {this.props.arrayEvento.map((Event) => (
+                  <Evento_comp evento={Event} />
                 ))}
               </div>
               <div></div>

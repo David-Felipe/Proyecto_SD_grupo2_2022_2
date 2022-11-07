@@ -1,16 +1,48 @@
 //Formulario donde se ingresa la informacion del usuario.
-import React from "react";
+import React, { ChangeEvent } from "react";
 import "./Ventana_registro.css";
 import Banner from "../Banner/Banner";
+import Perfil from "../Interface/InterfacePerfil";
 
 interface Props {
-  setActive: (input: string,retorno:any) => void;
+  setActive: (input: string, retorno: any) => void;
+  create: (perfil:Perfil) => void;
 }
 
-export default class Ventana_registro extends React.Component<Props, {}> {
+export default class Ventana_registro extends React.Component<Props, Perfil> {
   constructor(props: Props) {
     super(props);
   }
+
+  create = (input:string) => {
+    this.props.setActive(input,"")
+    this.props.create(this.state);
+    console.log(this.state);
+    // codigo para editar y cambiar de ventana juntas las funciones
+  };
+
+  changeName = (e: ChangeEvent) => {
+    this.setState({ name: (e.target as HTMLInputElement).value });
+  };
+
+  changeLastname = (e: ChangeEvent) => {
+    this.setState({ lastname: (e.target as HTMLInputElement).value });
+  };
+
+  changeEmail = (e: ChangeEvent) => {
+    this.setState({ email: (e.target as HTMLInputElement).value });
+  };
+  changeUsername = (e: ChangeEvent) => {
+    this.setState({ username: (e.target as HTMLInputElement).value });
+  };
+
+  changePassword = (e: ChangeEvent) => {
+    this.setState({ password: (e.target as HTMLInputElement).value });
+  };
+
+  changeConfirmPassword = (e: ChangeEvent) => {
+    this.setState({ confirm_password: (e.target as HTMLInputElement).value });
+  };
 
   render(): JSX.Element {
     return (
@@ -30,7 +62,11 @@ export default class Ventana_registro extends React.Component<Props, {}> {
                   Name(s):{" "}
                 </label>
                 <br></br>
-                <input className="input_name" id="inputName" />
+                <input
+                  className="input_name"
+                  id="inputName"
+                  onChange={this.changeName}
+                />
                 <br></br>
               </div>
               <div className="apellido">
@@ -38,7 +74,23 @@ export default class Ventana_registro extends React.Component<Props, {}> {
                   Last Name(s):{" "}
                 </label>
                 <br></br>
-                <input className="input_lastname" id="inputLastName" />
+                <input
+                  className="input_lastname"
+                  id="inputLastName"
+                  onChange={this.changeLastname}
+                />
+                <br></br>
+              </div>
+              <div className="usuario">
+                <label className="username" id="etiquetaConfirmPassword">
+                  Username:{" "}
+                </label>
+                <br></br>
+                <input
+                  className="input_username"
+                  id="inputUsername"
+                  onChange={this.changeUsername}
+                />
                 <br></br>
               </div>
               <div className="correo">
@@ -46,7 +98,11 @@ export default class Ventana_registro extends React.Component<Props, {}> {
                   Email unal:{" "}
                 </label>
                 <br></br>
-                <input className="input_email" id="inputEmail" />
+                <input
+                  className="input_email"
+                  id="inputEmail"
+                  onChange={this.changeEmail}
+                />
                 <br></br>
               </div>
               <div className="contraseña">
@@ -54,7 +110,11 @@ export default class Ventana_registro extends React.Component<Props, {}> {
                   Password:{" "}
                 </label>
                 <br></br>
-                <input className="input_password" id="inputPassword" />
+                <input
+                  className="input_password"
+                  id="inputPassword"
+                  onChange={this.changePassword}
+                />
                 <br></br>
               </div>
               <div className="confirm_contraseña">
@@ -68,20 +128,16 @@ export default class Ventana_registro extends React.Component<Props, {}> {
                 <input
                   className="input_confirmpassword"
                   id="inputConfirmPassword"
+                  onChange={this.changeConfirmPassword}
                 />
                 <br></br>
               </div>
               <button
                 type="button"
                 className="button_register"
-                onClick={() => this.props.setActive("INICIO","")}
+                onClick={() => this.create("INICIO")}
               >
-                <a
-                  href="D:\Desktop\juanXo\U\2022 - 2S\Estructuras de datos\Proyecto\Mockups Interfaz\Ventana de inicio\Ventana_De_Inicio.html"
-                  className="register"
-                >
-                  Register
-                </a>
+                Register
               </button>
             </div>
           </div>
