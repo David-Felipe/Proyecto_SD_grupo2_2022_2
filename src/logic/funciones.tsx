@@ -1,3 +1,4 @@
+
 //------------------------------------------Mini eventos------------------------------------------------------
 
 //Heap de MiniEventos
@@ -85,3 +86,102 @@ function crearMiniEvento( name: string,distancia: number,address: string,time_be
     heapMiniEventos.insert(heapMiniEventos.getSize(), mini_evento);
     
   }
+
+//elimina minievento del heap (? ///// TERMINAR ///// FUNCION BUSQUEDA HEAP
+function eliminarMiniEvento(heapMiniEventos: Heap<any>, name: string){
+    
+    //con fines de control, devolvemos el elemento eliminado.
+    //console.log(eliminado);
+}
+
+
+//-------------------------------------------Usuarios-------------------------------------------------------
+//var bdUsuarios = new AvlBst(null, );
+class Usuario {
+    private name: string;
+    private age: number;
+    private address: string;
+    private dob: Date;
+
+    constructor (name: string, age: number, address: string, dob: Date, id: number){
+        this.name = name;
+        this.age = age;
+        this.address = address;
+        this.dob = dob;
+    }
+
+    setName(newName: string) {
+        this.name = newName;
+    }
+    getName(): string{
+        return this.name;
+    }
+
+    setAge(newAge: number) {
+        this.age = newAge;
+    }
+    getAge(): number{
+        return this.age;
+    }
+
+    setAddress(newAddress: string) {
+        this.address = newAddress;
+    }
+    getId(): string{
+        return this.address;
+    }
+
+    setDob(newDob: Date) {
+        this.dob = newDob;
+    }
+    getDob(): Date{
+        return this.dob;
+    }
+}
+
+class Perfil{
+    private name: string;
+    private lastname: string;
+    private email: string;
+    private username: string;
+    private password: string;
+
+    constructor (name: string, lastname: string, email: string, username: string, password: string){
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+    setName(newName: string) {
+        this.name = newName;
+    }
+    getName(): string{
+        return this.name;
+    }
+
+    setLastname(newLastName: string) {
+        this.lastname = newLastName;
+    }
+    getLastName(): string{
+        return this.lastname;
+    }
+    
+    setEmail(newEmail: string) {
+        this.name = newEmail;
+    }
+    getEmail(): string{
+        return this.email;
+    }
+
+    setUsername(newUsername: string) {
+        this.username = newUsername;
+    }
+    getUsername(): string{
+        return this.username;
+    }
+
+
+
+}
