@@ -154,7 +154,7 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
                   className="button_create"
                   type="button"
                   id="button_create"
-                  onClick={() => this.create}
+                  onClick={this.create}
                 >
                   CREATE
                 </button>
