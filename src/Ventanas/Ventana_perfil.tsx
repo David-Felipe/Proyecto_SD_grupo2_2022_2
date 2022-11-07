@@ -10,7 +10,7 @@ interface Props {
   perfil: Perfil;
   edit: (perfil: Perfil) => void;
   setActive: (input: string, retorno: any) => void;
-  delete: () => void;
+  delete: (evento:Evento) => void;
   arrayEvento: Evento[];
 }
 

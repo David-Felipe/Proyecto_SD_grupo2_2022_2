@@ -56,7 +56,7 @@ export default class Evento_comp_p extends React.Component<Props, {}> {
             <button
               type="button"
               className="buttonDelete"
-              onClick={this.props.delete_ev(this.props.evento)}
+              onClick={() => this.props.delete_ev(this.props.evento)}
             >
               Delete
             </button>
