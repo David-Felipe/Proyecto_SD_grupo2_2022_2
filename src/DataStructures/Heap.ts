@@ -76,6 +76,9 @@ export default class Heap<T> {
         }
     }
     //
+    getSize(){
+        return this.size;
+    }
     //
     //funcionalidades usables: (metodos que son usados con el fin de utilizar el monticulo)
     //
