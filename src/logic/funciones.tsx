@@ -1,5 +1,8 @@
 //------------------------------------------Mini eventos------------------------------------------------------
 
+//Heap de MiniEventos
+let heapMiniEventos = new Heap(1000);
+
 class miniEvento {
     private name: string;
     private distancia: number;
