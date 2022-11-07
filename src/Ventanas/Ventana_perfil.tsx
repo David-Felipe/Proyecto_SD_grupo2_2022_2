@@ -9,7 +9,8 @@ import Evento from "../Interface/InterfaceEvento";
 interface Props {
   perfil: Perfil;
   edit: (perfil: Perfil) => void;
-  setActive: (input: string,retorno:any) => void;
+  setActive: (input: string, retorno: any) => void;
+  arrayEvento: Evento[];
 }
 
 export default class Ventana_perfil extends React.Component<Props, Perfil> {
@@ -17,29 +18,6 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
     super(props);
     this.state = this.props.perfil;
   }
-
-  evento: Evento = {
-    name: "PARTIDO",
-    distancia: 1,
-    address: "CAllE xxx",
-    time_begin: new Date(2012, 1, 31, 23, 59, 59),
-    time_end: new Date(2012, 1, 31, 23, 59, 59),
-    thematics: [
-      "FUTBOL",
-      "BASKETBALL",
-      "BEISBALL",
-      "BEISBALL",
-      "BEISBALL",
-      "BEISBALL",
-    ],
-  };
-
-  arrayEvento: Evento[] = [
-    this.evento,
-    this.evento,
-    this.evento,
-    this.evento
-  ];
 
   edit = () => {
     this.props.edit(this.state);
@@ -80,18 +58,14 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
           <img
             className="arrow_p"
             src="./Arrow 2.png"
-            onClick={() => this.props.setActive("BUSQUEDA","")}
+            onClick={() => this.props.setActive("BUSQUEDA", "")}
           />
           <img
             className="foto"
             src="./image_2022-10-01_182055546.png"
             width="300px"
           ></img>
-          <button
-            className="Editar"
-            type="button"
-            onClick={() => this.edit()}
-          >
+          <button className="Editar" type="button" onClick={() => this.edit()}>
             Edit
           </button>
           <label className="titulo_information">INFORMATION ABOUT YOU</label>
@@ -179,8 +153,11 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
         <div className="eventos">
           <br></br>
           {/* <!-- Aqui va el consumo de servicios de los eventos. --> */}
-          {this.arrayEvento.map((minievent) => (
-            <Evento_comp_p evento={minievent} setActive={this.props.setActive} />
+          {this.props.arrayEvento.map((minievent) => (
+            <Evento_comp_p
+              evento={minievent}
+              setActive={this.props.setActive}
+            />
           ))}
         </div>
         <div></div>

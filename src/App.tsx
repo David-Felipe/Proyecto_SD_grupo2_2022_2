@@ -21,6 +21,8 @@ export default class App extends React.Component<{}, State> {
   constructor(props: {}) {
     super(props);
     this.state = {
+      //perfil_atributo es un perfil de prueba para que al abrir Ventana_perfil
+      //te muestra la informacion de este
       perfil_atributo: {
         name: "Juan",
         lastname: "Carreño",
@@ -86,8 +88,8 @@ export default class App extends React.Component<{}, State> {
   };
 
   setPerfil = (perfil: Perfil) => {
-    this.setState({ perfil_atributo: perfil });
-    console.log(this.state);
+    //Aqui va el codigo para editar un perfil y la entrada de este metodo 
+    //es un perfil con todos sus atributos
   };
 
   setActive = (input: string, objeto: any) => {
@@ -126,6 +128,7 @@ export default class App extends React.Component<{}, State> {
             perfil={this.state.perfil_atributo}
             edit={this.setPerfil}
             setActive={this.setActive}
+            arrayEvento={this.arrayEvento}
           />
         );
         break;
