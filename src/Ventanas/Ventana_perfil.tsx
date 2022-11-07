@@ -10,6 +10,7 @@ interface Props {
   perfil: Perfil;
   edit: (perfil: Perfil) => void;
   setActive: (input: string, retorno: any) => void;
+  delete: () => void;
   arrayEvento: Evento[];
 }
 
@@ -157,6 +158,7 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
             <Evento_comp_p
               evento={minievent}
               setActive={this.props.setActive}
+              delete_ev={this.props.delete}
             />
           ))}
         </div>

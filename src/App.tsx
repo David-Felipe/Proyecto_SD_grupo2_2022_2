@@ -132,6 +132,7 @@ export default class App extends React.Component<{}, State> {
             perfil={this.state.perfil_atributo}
             edit={this.setPerfil}
             setActive={this.setActive}
+            delete={this.delete_ev}
             arrayEvento={this.arrayEvento}
           />
         );
