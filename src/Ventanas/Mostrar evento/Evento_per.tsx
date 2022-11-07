@@ -4,7 +4,8 @@ import Evento from "../../Interface/InterfaceEvento";
 
 interface Props {
   evento: Evento;
-  setActive: (input: string,retorno:any) => void;
+  setActive: (input: string, retorno: any) => void;
+  delete_ev: (event: Evento) => void;
 }
 
 export default class Evento_comp_p extends React.Component<Props, {}> {
@@ -48,11 +49,15 @@ export default class Evento_comp_p extends React.Component<Props, {}> {
             <button
               type="button"
               className="buttonEdit"
-              onClick={() => this.props.setActive("EDITAR",this.props.evento)}
+              onClick={() => this.props.setActive("EDITAR", this.props.evento)}
             >
               Edit
             </button>
-            <button type="button" className="buttonDelete">
+            <button
+              type="button"
+              className="buttonDelete"
+              onClick={this.props.delete_ev(this.props.evento)}
+            >
               Delete
             </button>
             <br></br>

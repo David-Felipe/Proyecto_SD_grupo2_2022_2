@@ -87,6 +87,10 @@ export default class App extends React.Component<{}, State> {
     this.setActive("BUSQUEDA", "");
   };
 
+  delete_ev = (evento: Evento) => {
+    //Codigo para eleiminar un evento teniendo el evento completo con sus atributos
+  }
+
   setPerfil = (perfil: Perfil) => {
     //Aqui va el codigo para editar un perfil y la entrada de este metodo 
     //es un perfil con todos sus atributos
