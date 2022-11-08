@@ -1,4 +1,4 @@
-
+import Heap from "DataStructures/Heap";
 //------------------------------------------Mini eventos------------------------------------------------------
 
 //Heap de MiniEventos
