@@ -2,7 +2,7 @@
 //------------------------------------------Mini eventos------------------------------------------------------
 
 //Heap de MiniEventos
-let heapMiniEventos = new Heap(1000);
+const heapMiniEventos = new Heap(1000);
 
 class miniEvento {
     private name: string;
@@ -12,7 +12,6 @@ class miniEvento {
     private time_end: Date;
     private thematics: string[];
     private id: number;
-    array: any[];
 
     constructor (name: string,distancia: number,address: string,time_begin: Date,time_end: Date,thematics: string[], id: number){
         this.name = name;
@@ -22,7 +21,6 @@ class miniEvento {
         this.time_end = time_end;
         this. thematics = thematics;
         this.id = id;
-        this.array = [name,distancia,address,time_begin,time_end,thematics,id];
     }
 
     setName(newName: string) {
@@ -73,18 +71,10 @@ class miniEvento {
     getId(): number{
         return this.id;
     }
-
-    setArray(newArray: any[]) {
-        this.array = newArray;
-    }
-    getArray(): any[]{
-      return this.array;
-    }
-
 }
 //Metodo de creacion de minieventos
 function crearMiniEvento( name: string,distancia: number,address: string,time_begin: Date,time_end: Date,thematics: string[]) {
-    let mini_evento = new miniEvento(name, distancia, address, time_begin, time_end, thematics, 0);
+    const mini_evento = new miniEvento(name, distancia, address, time_begin, time_end, thematics, 0);
     mini_evento.setName(name);
     mini_evento.setDistancia(distancia);
     mini_evento.setAddress(address);
@@ -92,28 +82,10 @@ function crearMiniEvento( name: string,distancia: number,address: string,time_be
     mini_evento.setTime_end(time_end);
     mini_evento.setThematics(thematics);
     mini_evento.setId(heapMiniEventos.getSize());
-    mini_evento.setArray([name, distancia, address, time_begin, time_end, thematics, mini_evento.getId()]);
   
-    heapMiniEventos.insert(heapMiniEventos.getSize(),mini_evento.array);
+    heapMiniEventos.insert(heapMiniEventos.getSize(), mini_evento);
     
   }
-
-  //prueba
-  //var tiemp_inicio = new Date('2023-09-24');
-  //var tiemp_fin = new Date('2023-09-25');
-
-  //crearMiniEvento("juego",22,"CLL2B",tiemp_inicio,tiemp_fin,["juego"]);
-  //console.log(heapMiniEventos.informacion());
-  
-  
-
-//elimina minievento del heap (? ///// TERMINAR ///// FUNCION BUSQUEDA HEAP
-function eliminarMiniEvento(heapMiniEventos: Heap<any>, name: string){
-    
-    //con fines de control, devolvemos el elemento eliminado.
-    //console.log(eliminado);
-}
-
 
 //-------------------------------------------Usuarios-------------------------------------------------------
 class Usuario {
