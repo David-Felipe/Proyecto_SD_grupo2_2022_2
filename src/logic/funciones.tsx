@@ -87,6 +87,15 @@ function crearMiniEvento( name: string,distancia: number,address: string,time_be
     
   }
 
+//prueba 
+//const tb = new Date(2022-2-21);
+//const te = new Date(2022-7-21);
+//crearMiniEvento("juego1", 2, "CLL3b#2-3", tb, te, ["juego","juego x2"]);
+//crearMiniEvento("juego2", 2, "CLL3b#2-3", tb, te, ["juego","juego x2"]);
+//crearMiniEvento("juego3", 2, "CLL3b#2-3", tb, te, ["juego","juego x2"]);
+//crearMiniEvento("juego4", 2, "CLL3b#2-3", tb, te, ["juego","juego x2"]);
+//console.log(heapMiniEventos.informacion());
+
 //-------------------------------------------Usuarios-------------------------------------------------------
 class Usuario {
     private name: string;
@@ -176,4 +185,5 @@ class Perfil{
 
 
 }
+
 
