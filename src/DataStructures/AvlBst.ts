@@ -269,6 +269,9 @@ export class AvlBst<T> {
 
         if (parentNode != null) {
 
+            const parentID: number = parentNode.getID();
+            const sonID: number = sonNode.getID();
+
             // * Case in which sonNode was the max in the tree
             if (this.root != null) {
 
@@ -277,7 +280,9 @@ export class AvlBst<T> {
 
             }
 
-            return this.rightAncestorIterator(sonNode);
+            if (parentID > sonID) return parentNode;
+
+            return this.rightAncestorIterator(parentNode);
 
         }
 
@@ -292,7 +297,12 @@ export class AvlBst<T> {
 
         if (parentNode != null) {
 
-            return this.rightAncestorIterator(sonNode);
+            const parentID: number = parentNode.getID();
+            const sonID: number = sonNode.getID();
+
+            if (parentID > sonID) return parentNode;
+
+            return this.rightAncestorIterator(parentNode);
 
         }
 
@@ -307,7 +317,7 @@ export class AvlBst<T> {
         if (rightSon != null) return this.findLeftDescendant(rightSon);
 
         const rightAncestor = this.findRightAncestor(currentNode);
-        if (currentNode.getID < rightAncestor.getID) return rightAncestor;
+        if (currentNode.getID() < rightAncestor.getID()) return rightAncestor;
 
         throw Error("There is no next, the node had the max ID in the tree");
 
@@ -326,16 +336,19 @@ export class AvlBst<T> {
     // rangeSearch
     searchRange(beggID: number, endID: number): LinkedList<T> {
 
-        if (this.root == null) throw ("El arbol está vacio, no puedo hacer un searchRange");
+        if (this.root == null) throw Error("El arbol está vacio, no puedo hacer un searchRange");
 
         const nodesInRange: LinkedList<T> = new LinkedList<T>();
         let currentNode: AvlNode<T> = this.findNode(beggID, this.root);
+        let previousNode: AvlNode<T>;
 
         while (currentNode.getID() <= endID) {
 
             if (currentNode.getID() >= beggID) nodesInRange.pushBack(currentNode.getData());
 
+            previousNode = currentNode;
             currentNode = this.findNextNode(currentNode);
+            if (currentNode == previousNode) break;
 
         }
 
@@ -795,7 +808,7 @@ export class AvlBst<T> {
 
                 // promoting promotedSon
                 this.disconnectSon(promotedSon);
-                this.root = promotedSon
+                this.root = promotedSon;
 
             }
             else throw Error("El padre de demotedSon era nulo pero demotedSon no era la raiz, umm, algo anda mal...");
@@ -884,7 +897,7 @@ export class AvlBst<T> {
 
         do {
 
-            current = compassQueue.popFront()
+            current = compassQueue.popFront();
             rightSon = current.getRightSon();
             leftSon = current.getLeftSon();
 
