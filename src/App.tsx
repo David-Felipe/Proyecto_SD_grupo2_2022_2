@@ -12,6 +12,7 @@ import Evento from "./Interface/InterfaceEvento";
 interface State {
   perfil_atributo: Perfil;
   active: string;
+  showError: boolean;
 }
 
 export default class App extends React.Component<{}, State> {
@@ -31,16 +32,13 @@ export default class App extends React.Component<{}, State> {
         password: "12345",
         confirm_password: "******",
       },
-      //Modificar el active porque no todas la ventanas se conectan por botones
-      // INICIO - VENTANA EMERGENTE - REGISTRO (conectadas)
-      // EDITAR - PERFIL (conectadas)
-      // BUSQUEDA - EVENTO (conectadas)
       active: "INICIO",
+      showError: false
     };
   }
 
-  create = (nuevo_perfil: Perfil) => {
-    //metodo crear nuevo perfil
+  changeShowError = (condition: boolean) => {
+    this.setState({ showError: condition });
   };
 
   autentication = (name: string, password: string) => {
@@ -49,7 +47,7 @@ export default class App extends React.Component<{}, State> {
     this.setActive("BUSQUEDA", "");
     //false ---> contraseña incorrecta mostrar un alert("Contraseña incorrecta")
     //false ---> no encontro usuario y hacer
-    //                                      this.changeError(true)
+                                        //  this.changeShowError(true);
     //retorna true solo para pruebas
   };
 
@@ -100,6 +98,10 @@ export default class App extends React.Component<{}, State> {
     //Aqui va el codigo para editar un perfil y la entrada de este metodo
     //es un perfil con todos sus atributos
   };
+  
+  create = (nuevo_perfil: Perfil) => {
+    //metodo crear nuevo perfil
+  };
 
   setActive = (input: string, objeto: any) => {
     this.setState({ active: input });
@@ -112,6 +114,8 @@ export default class App extends React.Component<{}, State> {
       <Ventana_inicio
         setActive={this.setActive}
         autentication={this.autentication}
+        changeShowError={this.changeShowError}
+        showError_in={this.state.showError}
       />
     );
 
@@ -123,6 +127,8 @@ export default class App extends React.Component<{}, State> {
           <Ventana_inicio
             setActive={this.setActive}
             autentication={this.autentication}
+            changeShowError={this.changeShowError}
+            showError_in={this.state.showError}
           />
         );
         break;

@@ -12,6 +12,8 @@ interface State {
 interface Props {
   setActive: (input: string, retorno: any) => void;
   autentication: (name: string, password: string) => void;
+  changeShowError : (condition:boolean) => void;
+  showError_in : boolean;
 }
 
 export class Ventana_inicio extends React.Component<Props, State> {
@@ -22,10 +24,6 @@ export class Ventana_inicio extends React.Component<Props, State> {
     super(props);
     this.state = { showError: false };
   }
-
-  changeShowError = (condition: boolean) => {
-    this.setState({ showError: condition });
-  };
 
   autentication = (name: string, password: string) => {
     console.log("nombre", name);
@@ -106,9 +104,9 @@ export class Ventana_inicio extends React.Component<Props, State> {
             </div>
           </div>
         </section>
-        {this.state.showError && (
+        {this.props.showError_in && (
           <Ventana_emergente
-            changeShowError={this.changeShowError}
+            changeShowError={this.props.changeShowError}
             setActive={this.props.setActive}
           />
         )}

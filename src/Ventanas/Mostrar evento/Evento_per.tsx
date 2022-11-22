@@ -69,6 +69,8 @@ export default class Evento_comp_p extends React.Component<Props, {}> {
         <br></br>
         <br></br>
         <br></br>
+        <br></br>
+        <br></br>
       </>
     );
   }
