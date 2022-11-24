@@ -22,8 +22,8 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
 
   edit = () => {
     this.props.edit(this.state);
+    //imprime solo para verificar si se modifico
     console.log(this.state);
-    // codigo para editar y cambiar de ventana juntas las funciones
   };
 
   changeName = (e: ChangeEvent) => {
@@ -34,9 +34,6 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
     this.setState({ lastname: (e.target as HTMLInputElement).value });
   };
 
-  changeEmail = (e: ChangeEvent) => {
-    this.setState({ email: (e.target as HTMLInputElement).value });
-  };
   changeUsername = (e: ChangeEvent) => {
     this.setState({ username: (e.target as HTMLInputElement).value });
   };
@@ -94,19 +91,6 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
                 id="inputLastName"
                 value={this.state.lastname}
                 onChange={this.changeLastname}
-              ></input>
-              <br></br>
-            </div>
-            <div className="correo_p">
-              <label className="email" id="etiquetaEmail">
-                Email unal:{" "}
-              </label>
-              <br></br>
-              <input
-                className="input_email"
-                id="inputEmail"
-                value={this.state.email}
-                onChange={this.changeEmail}
               ></input>
               <br></br>
             </div>

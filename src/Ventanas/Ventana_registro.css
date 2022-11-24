@@ -157,41 +157,13 @@ h1 {
   position: absolute;
 }
 
-.correo {
-  position: absolute;
-  width: 169px;
-  height: 43px;
-  left: 161px;
-  top: 336px;
-
-  font-family: "Cabin";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 35px;
-  line-height: 43px;
-
-  display: flex;
-  align-items: center;
-  text-align: center;
-
-  color: #000000;
-}
-
-.input_email {
-  position: absolute;
-  width: 450px;
-  height: 34px;
-  left: 322px;
-  position: absolute;
-}
-
 .usuario{
     
   position: absolute;
   width: 169px;
   height: 43px;
   left: 159px;
-  top: 398px;
+  top: 340px;
 
   font-family: 'Cabin';
   font-style: normal;
@@ -211,7 +183,7 @@ h1 {
   width: 169px;
   height: 43px;
   left: 161px;
-  top: 456px;
+  top: 407px;
 
   font-family: "Cabin";
   font-style: normal;
@@ -238,7 +210,7 @@ h1 {
   width: 284px;
   height: 43px;
   left: 161px;
-  top: 528px;
+  top: 474px;
 
   font-family: "Cabin";
   font-style: normal;

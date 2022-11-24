@@ -28,10 +28,7 @@ export default class Ventana_registro extends React.Component<Props, Perfil> {
   changeLastname = (e: ChangeEvent) => {
     this.setState({ lastname: (e.target as HTMLInputElement).value });
   };
-
-  changeEmail = (e: ChangeEvent) => {
-    this.setState({ email: (e.target as HTMLInputElement).value });
-  };
+  
   changeUsername = (e: ChangeEvent) => {
     this.setState({ username: (e.target as HTMLInputElement).value });
   };
@@ -90,18 +87,6 @@ export default class Ventana_registro extends React.Component<Props, Perfil> {
                   className="input_username"
                   id="inputUsername"
                   onChange={this.changeUsername}
-                />
-                <br></br>
-              </div>
-              <div className="correo">
-                <label className="email" id="etiquetaEmail">
-                  Email unal:{" "}
-                </label>
-                <br></br>
-                <input
-                  className="input_email"
-                  id="inputEmail"
-                  onChange={this.changeEmail}
                 />
                 <br></br>
               </div>

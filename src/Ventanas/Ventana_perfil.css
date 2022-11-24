@@ -198,7 +198,7 @@ h1{
     width: 203.92px;
     height: 42.97px;
     left: 311.94px;
-    top: 157.02px;
+    top: 170.02px;
 
     font-family: 'Cabin';
     font-style: normal;
@@ -220,39 +220,12 @@ h1{
     background: #F8F4F4;
 }
 
-.correo_p{
-    position: absolute;
-    width: 203.92px;
-    height: 42.97px;
-    left: 311.94px;
-    top: 219.98px;
-
-    font-family: 'Cabin';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 33.3245px;
-    line-height: 40px;
-    display: flex;
-    align-items: center;
-
-    color: #000000;
-}
-
-.input_email{
-    position: absolute;
-    width: 520.14px;
-    height: 33.98px;
-    left: 400px;
-
-    background: #F8F4F4;
-}
-
 .username_p{
     position: absolute;
     width: 203.92px;
     height: 42.97px;
     left: 311.94px;
-    top: 282.95px;
+    top: 246.95px;
 
     font-family: 'Cabin';
     font-style: normal;
@@ -279,7 +252,7 @@ h1{
     width: 203.92px;
     height: 42.97px;
     left: 311.94px;
-    top: 345.91px;
+    top: 322.91px;
 
     font-family: 'Cabin';
     font-style: normal;
@@ -306,7 +279,7 @@ h1{
     width: 303.92px;
     height: 42.97px;
     left: 311.94px;
-    top: 418.87px;
+    top: 398.87px;
 
     font-family: 'Cabin';
     font-style: normal;
