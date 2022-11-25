@@ -57,7 +57,7 @@ export default class App extends React.Component<{}, State> {
     address: "CAllE xyx",
     time_begin: new Date(),
     time_end: new Date(),
-    thematics: [false,false,false,false,false,false],
+    thematics: [true,false,false,true,false,false],
   };
 
   //Se necesita una funcion que tome los minieventos y los guarde en un arreglo de Evento[]
@@ -170,7 +170,7 @@ export default class App extends React.Component<{}, State> {
           <Ventana_dev
             setActive={this.setActive}
             evento={this.retorno}
-            edit_m={this.setEvent}
+            edit={this.setEvent}
           />
         );
         break;

@@ -1,2 +1,2 @@
 import React from "react";
-import GoogleMaps from "simple-react-google-maps";
+// import GoogleMaps from "simple-react-google-maps";

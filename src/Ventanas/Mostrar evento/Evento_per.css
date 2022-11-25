@@ -67,6 +67,11 @@
     left: 126px;
 }
 
+.ShowThems_per{
+    position: absolute;
+    left: 0px;
+}
+
 .buttonEdit{
     position: absolute;
     width: 278px;

@@ -1,5 +1,6 @@
 // Ventana a la que se dirige para editar los eventos.
 import React, { ChangeEvent } from "react";
+import { useState } from "react";
 import "./Ventana_dev.css";
 import Banner from "../Banner/Banner";
 import Evento from "../Interface/InterfaceEvento";
@@ -7,18 +8,15 @@ import Evento from "../Interface/InterfaceEvento";
 interface Props {
   setActive: (input: string, retorno: any) => void;
   evento: Evento;
-  edit_m: (evento: Evento) => void;
+  edit: (evento: Evento) => void;
 }
 
-interface State{
-
-}
 
 export default class Ventana_dev extends React.Component<Props, Evento> {
 
   constructor(props: Props) {
     super(props);
-    this.setState(this.props.evento);
+    this.state =this.props.evento;
   }
 
   completarHoraInicio = (fecha:Date) => {
@@ -45,11 +43,6 @@ export default class Ventana_dev extends React.Component<Props, Evento> {
     return (n < 10 ? '0' : '') + n;
   };
 
-  edit = (evento:Evento) =>{
-    console.log(evento)
-    // this.props.edit_m(this.state);
-  }
-
   changeName = (e: ChangeEvent) => {
     this.setState({ name: (e.target as HTMLInputElement).value });
   };
@@ -68,9 +61,8 @@ export default class Ventana_dev extends React.Component<Props, Evento> {
 
   changeDeporte = (e: ChangeEvent) => {
     var current_thems: boolean[] = this.state.thematics;
-    console.log(this.props.evento.thematics)
-    // current_thems[0] = !((e.target as HTMLInputElement).checked);
-    // this.setState({ thematics: current_thems });
+    current_thems[0] = !((e.target as HTMLInputElement).checked);
+    this.setState({ thematics: current_thems });
   };
 
   changeSocializar = (e: ChangeEvent) => {
@@ -119,7 +111,7 @@ export default class Ventana_dev extends React.Component<Props, Evento> {
             <div className="mapa">
               {/* <!-- Aqui va implementado el mapa --> */}
               <div className="coordenada">
-                
+
               </div>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15941.379358161692!2d-74.08466621092664!3d4.643676758242312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2sco!4v1666105674940!5m2!1ses-419!2sco"
@@ -167,7 +159,6 @@ export default class Ventana_dev extends React.Component<Props, Evento> {
                   type="datetime-local"
                   className="inputTime_begin_dev"
                   id="inputTime_begin_dev"
-                  min={new Date().toDateString()}
                   onChange={this.changeTimeBegin}
                 ></input>
                 <br></br>
@@ -190,7 +181,6 @@ export default class Ventana_dev extends React.Component<Props, Evento> {
                       type="checkbox"
                       name="deporte"
                       value="1"
-                      // checked={this.state.thematics}
                       onChange={this.changeDeporte}
                     />
                     DEPORTE <br />
@@ -240,7 +230,7 @@ export default class Ventana_dev extends React.Component<Props, Evento> {
                 className="button_create"
                 type="button"
                 id="button_create"
-                onClick={() => this.edit(this.state)}
+                onClick={() => this.props.edit(this.state)}
               >
                 EDIT
               </button>

@@ -61,9 +61,14 @@ export default class Evento_comp extends React.Component<Props, {}> {
           </label>
           <br></br>
           <label>THEMATIC(S): </label>
-          {this.props.evento.thematics.map((tema) => (
-            <label> {tema} </label>
-          ))}
+          <label className="ShowThems">
+            {this.props.evento.thematics[0] ? " DEPORTE -" : ""}
+            {this.props.evento.thematics[1] ? " SOCIALIZAR -" : ""}
+            {this.props.evento.thematics[2] ? " LECTURA -" : ""}
+            {this.props.evento.thematics[3] ? " MUSICA -" : ""}
+            {this.props.evento.thematics[4] ? " JUEGOS -" : ""}
+            {this.props.evento.thematics[5] ? " OTROS -" : ""}
+          </label>
           <br></br>
           <br></br>
         </form>

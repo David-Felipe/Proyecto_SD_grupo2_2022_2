@@ -63,9 +63,14 @@ export default class Evento_comp_p extends React.Component<Props, {}> {
             <br></br>
             <label>THEMATIC(S): </label>
             <label className="thematics">
-              {this.props.evento.thematics.map((tema) => (
-                <label> {tema} - </label>
-              ))}
+              <label className="ShowThems_per">
+                {(this.props.evento.thematics[0] ? " DEPORTE -" : "")}
+                {(this.props.evento.thematics[1] ? " SOCIALIZAR -" : "")}
+                {(this.props.evento.thematics[2] ? " LECTURA -" : "")}
+                {(this.props.evento.thematics[3] ? " MUSICA -" : "")}
+                {(this.props.evento.thematics[4] ? " JUEGOS -" : "")}
+                {(this.props.evento.thematics[5] ? " OTROS -" : "")}
+              </label>
             </label>
             <button
               type="button"
