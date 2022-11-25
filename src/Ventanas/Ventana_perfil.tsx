@@ -22,7 +22,7 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
 
   edit = () => {
     this.props.edit(this.state);
-    //imprime solo para verificar si se modifico
+    //imprime solo para verificar si se modifica
     console.log(this.state);
   };
 

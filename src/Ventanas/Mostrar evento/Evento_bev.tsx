@@ -11,6 +11,30 @@ export default class Evento_comp extends React.Component<Props, {}> {
     super(props);
   }
 
+  completarHoraInicio_sinT = (fecha: Date) => {
+    var mes = fecha.getMonth() + 1; //obteniendo mes
+    var dia = fecha.getDate(); //obteniendo dia
+    var ano = fecha.getFullYear(); //obteniendo año
+    var hora = fecha.getHours(); //obteniendo hora
+    var minutos = fecha.getMinutes(); //obteniendo minuto
+
+    return (
+      ano +
+      "-" +
+      this.minTwoDigits(mes) +
+      "-" +
+      this.minTwoDigits(dia) +
+      "  " +
+      this.minTwoDigits(hora) +
+      ":" +
+      this.minTwoDigits(minutos)
+    );
+  };
+
+  minTwoDigits = (n: number) => {
+    return (n < 10 ? "0" : "") + n;
+  };
+
   render(): JSX.Element {
     return (
       <>
@@ -27,17 +51,18 @@ export default class Evento_comp extends React.Component<Props, {}> {
           <br></br>
           <label>TIME</label>
           <label className="begin">BEGIN: </label>
-          <label className="time_begin">
-            {this.props.evento.time_begin.getHours()}{":"}{this.props.evento.time_begin.getMinutes()}
+          <label className="time_begin_ev">
+            {this.completarHoraInicio_sinT(this.props.evento.time_begin)}
           </label>
+          <br></br>
           <label className="end">END: </label>
-          <label className="time_end">
-            {this.props.evento.time_end.getHours()}{":"}{this.props.evento.time_end.getMinutes()}
+          <label className="time_end_ev">
+            {this.completarHoraInicio_sinT(this.props.evento.time_end)}
           </label>
           <br></br>
           <label>THEMATIC(S): </label>
           {this.props.evento.thematics.map((tema) => (
-            <label> {tema}{" "}</label>
+            <label> {tema} </label>
           ))}
           <br></br>
           <br></br>

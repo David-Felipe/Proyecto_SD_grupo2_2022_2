@@ -7,13 +7,8 @@
     border-color: black;
     border: 1px solid;
     border-radius: 30px;
-    overflow:scroll
-
 }
 
-.contenido_ev::-webkit-scrollbar{
-    visibility:hidden;
-}
 
 .fragmento{
     position: relative;
@@ -48,24 +43,26 @@
     left: 126px;
 }
 
-.time_begin{
+.time_begin_ev{
     position: absolute;
+    width: 300px;
     left: 183px;
 }
 
 .end{
     position: absolute;
-    left: 258px;
+    left: 126px;
 }
 
-.time_end{
+.time_end_ev{
     position: absolute;
-    left: 298px;
+    width: 300px;
+    left: 183px;
 }
 
 .thematics{
     position: absolute;
-    width: 261px;
+    width: 300px;
     height: 16.19px;
     left: 126px;
 }

@@ -290,3 +290,23 @@
 .arrow:hover{
   transform:scale(1.5);
 }
+
+.CheckBoxs{
+  position: absolute;
+  width: 161.68px;
+  height: 24.34px;
+  left: 180px;
+  top: 390px;
+
+  font-size: 20px;
+}
+
+.CheckBoxs2{
+  position: absolute;
+  width: 161.68px;
+  height: 24.34px;
+  left: 325px;
+  top: 390px;
+
+  font-size: 20px;
+}

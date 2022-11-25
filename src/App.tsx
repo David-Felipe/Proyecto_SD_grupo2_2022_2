@@ -1,7 +1,7 @@
 import React from "react";
 import Ventana_bev from "./Ventanas/Ventana_bev";
 import Ventana_dev from "./Ventanas/Ventana_dev";
-import Ventana_Evento from "./Ventanas/Ventana_Evento";
+import Ventana_cev from "./Ventanas/Ventana_cev";
 import Ventana_perfil from "./Ventanas/Ventana_perfil";
 import Ventana_registro from "./Ventanas/Ventana_registro";
 import Ventana_inicio from "./Ventanas/Ventana_inicio";
@@ -54,10 +54,10 @@ export default class App extends React.Component<{}, State> {
   evento: Evento = {
     name: "PARTIDO",
     distancia: 1,
-    address: "CAllE xxx",
-    time_begin: new Date(2012, 1, 31, 23, 59, 59),
-    time_end: new Date(2012, 1, 31, 23, 59, 59),
-    thematics: ["FUTBOL", "BASKETBALL", "BEISBALL", "BEISBALL", "BEISBALL"],
+    address: "CAllE xyx",
+    time_begin: new Date(),
+    time_end: new Date(),
+    thematics: [false,false,false,false,false,false],
   };
 
   //Se necesita una funcion que tome los minieventos y los guarde en un arreglo de Evento[]
@@ -67,6 +67,7 @@ export default class App extends React.Component<{}, State> {
 
   //Elementos para prueba
   arrayEvento: Evento[] = [
+    this.evento,
     this.evento,
     this.evento,
     this.evento,
@@ -90,6 +91,7 @@ export default class App extends React.Component<{}, State> {
 
   setEvent = (evento: Evento) => {
     //Aqui va el codigo que edita un evento recibiendo el mismo evento editado
+    console.log(evento.name);
     this.setActive("PERFIL", "");
   };
 
@@ -149,7 +151,7 @@ export default class App extends React.Component<{}, State> {
         break;
       case "EVENTO":
         ventana = (
-          <Ventana_Evento
+          <Ventana_cev
             setActive={this.setActive}
             create_ev={this.create_ev}
           />
@@ -168,7 +170,7 @@ export default class App extends React.Component<{}, State> {
           <Ventana_dev
             setActive={this.setActive}
             evento={this.retorno}
-            edit={this.setEvent}
+            edit_m={this.setEvent}
           />
         );
         break;

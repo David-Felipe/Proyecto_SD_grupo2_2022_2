@@ -1,6 +1,6 @@
 // Ventana donde se redirecciona para crear eventos
 import React, { ChangeEvent } from "react";
-import "./Ventana_Evento.css";
+import "./Ventana_cev.css";
 import Banner from "../Banner/Banner";
 import Evento from "../Interface/InterfaceEvento";
 
@@ -9,10 +9,7 @@ interface Props {
   create_ev: (evento: Evento) => void;
 }
 
-export default class Ventana_Evento extends React.Component<Props, {}> {
-  time_begin_current: string = "";
-  time_end_current: string = "";
-  new_thematic: string = "";
+export default class Ventana_cev extends React.Component<Props, {}> {
 
   constructor(props: Props) {
     super(props);
@@ -24,19 +21,7 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
     address: "CAllE xxx",
     time_begin: new Date(2012, 1, 31, 23, 59, 59),
     time_end: new Date(2012, 1, 31, 23, 59, 59),
-    thematics: ["FUTBOL"],
-  };
-
-  create = () => {
-    var date1 = new Date(this.time_begin_current);
-    var date2 = new Date(this.time_end_current);
-    this.evento.time_begin = date1;
-    this.evento.time_end = date2;
-    this.props.create_ev(this.evento);
-  };
-
-  add = () => {
-    this.evento.thematics.push(this.new_thematic);
+    thematics: [false,false,false,false,false,false],
   };
 
   changeName = (e: ChangeEvent) => {
@@ -48,15 +33,47 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
   };
 
   changeTimeBegin = (e: ChangeEvent) => {
-    this.time_begin_current = (e.target as HTMLInputElement).value;
+    this.evento.time_begin = new Date((e.target as HTMLInputElement).value);
   };
 
   changeTimeEnd = (e: ChangeEvent) => {
-    this.time_end_current = (e.target as HTMLInputElement).value;
+    this.evento.time_end = new Date((e.target as HTMLInputElement).value);
   };
 
-  changeThematics = (e: ChangeEvent) => {
-    this.new_thematic = (e.target as HTMLInputElement).value;
+  changeDeporte = (e: ChangeEvent) => {
+    var current_thems: boolean[] = this.evento.thematics;
+    current_thems[0] = !(e.target as HTMLInputElement).checked;
+    this.setState({ thematics: current_thems });
+  };
+
+  changeSocializar = (e: ChangeEvent) => {
+    var current_thems: boolean[] = this.evento.thematics;
+    current_thems[1] = !(e.target as HTMLInputElement).checked;
+    this.setState({ thematics: current_thems });
+  };
+
+  changeLectura = (e: ChangeEvent) => {
+    var current_thems: boolean[] = this.evento.thematics;
+    current_thems[2] = !(e.target as HTMLInputElement).checked;
+    this.setState({ thematics: current_thems });
+  };
+
+  changeMusica = (e: ChangeEvent) => {
+    var current_thems: boolean[] = this.evento.thematics;
+    current_thems[3] = !(e.target as HTMLInputElement).checked;
+    this.setState({ thematics: current_thems });
+  };
+
+  changeJuegos = (e: ChangeEvent) => {
+    var current_thems: boolean[] = this.evento.thematics;
+    current_thems[4] = !(e.target as HTMLInputElement).checked;
+    this.setState({ thematics: current_thems });
+  };
+
+  changeOtros = (e: ChangeEvent) => {
+    var current_thems: boolean[] = this.evento.thematics;
+    current_thems[5] = !(e.target as HTMLInputElement).checked;
+    this.setState({ thematics: current_thems });
   };
 
   render(): JSX.Element {
@@ -116,6 +133,8 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
                     Time{" "}
                   </label>
                   <input
+                    type="datetime-local"
+                    min={Date()}
                     className="inputTime_begin"
                     id="inputTime_begin"
                     onChange={this.changeTimeBegin}
@@ -123,6 +142,7 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
                   <br></br>
                 </div>
                 <input
+                  type="datetime-local"
                   className="inputTime_end"
                   id="inputTime_end"
                   onChange={this.changeTimeEnd}
@@ -131,30 +151,32 @@ export default class Ventana_Evento extends React.Component<Props, {}> {
                 <div>
                   <div>
                     <label className="tematica" id="etiquetaThematics">
-                      Thematics{" "}
+                      Thematics
                     </label>
-                    <input
-                      className="inputThematics"
-                      id="inputThematics"
-                      onChange={this.changeThematics}
-                    />
-                    <br></br>
                   </div>
-                  <button
-                    type="button"
-                    className="buttonThematics"
-                    id="inputThematics"
-                    onClick={this.add}
-                  >
-                    Add
-                  </button>
+                  <div className="CheckBoxs">
+                    <input type="checkbox" name="deporte" value="1" />
+                    DEPORTE <br />
+                    <input type="checkbox" name="socializar" value="3" />
+                    SOCIALIZAR <br />
+                    <input type="checkbox" name="lectura" value="5" />
+                    LECTURA <br />
+                  </div>
+                  <div className="CheckBoxs2">
+                    <input type="checkbox" name="musica" value="2" />
+                    MUSICA <br />
+                    <input type="checkbox" name="juegos" value="4" />
+                    JUEGOS <br />
+                    <input type="checkbox" name="Otros" value="6" />
+                    Otros <br />
+                  </div>
                   <br></br>
                 </div>
                 <button
                   className="button_create"
                   type="button"
                   id="button_create"
-                  onClick={this.create}
+                  onClick={() => this.props.create_ev(this.evento)}
                 >
                   CREATE
                 </button>
