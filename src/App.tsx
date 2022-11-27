@@ -43,12 +43,35 @@ export default class App extends React.Component<{}, State> {
 
   autentication = (username: string, password: string) => {
     //authenticacion y retorna
-    //true ---> si lo encontro y tiene contraseña valida y hace
-    this.setActive("BUSQUEDA", "");
-    //false ---> contraseña incorrecta mostrar un alert("Contraseña incorrecta")
-    //false ---> no encontro usuario y hacer
-    //  this.changeShowError(true);
-    //retorna true solo para pruebas
+
+    // hashing entered username
+    const usernameHashed = Hasher.hashString(username);
+    let userSearched: Perfil;
+
+    try {
+
+      userSearched = this.avlUsuarios.findData(usernameHashed);
+
+      if (userSearched.password === password) {
+
+        //true ---> si lo encontro y tiene contraseña valida y hace
+        this.setActive("BUSQUEDA", "");
+        return true;
+
+      }
+
+      //false ---> contraseña incorrecta mostrar un alert("Contraseña incorrecta")
+      alert("Contraseña incorrecta");
+      return false;
+
+    } catch (error) {
+
+      //false ---> no encontro usuario y hacer
+      this.changeShowError(true);
+      return false;
+
+    }
+
   };
 
   //Elementos para prueba
@@ -70,6 +93,8 @@ export default class App extends React.Component<{}, State> {
     confirm_password: "******",
   }
 
+  // * Declarando "bases de datos", guiño, guiño, codo, codo 
+  // eslint-disable-next-line
   retorno: any = "hola";
   heapMiniEventos: Heap<Evento> = new Heap(1000);
   Hasher = new Hasher();
@@ -193,8 +218,33 @@ export default class App extends React.Component<{}, State> {
     this.avlUsuarios.insert(perfil, Hasher.hashString(perfil.username))
   };
 
-  create = (nuevo_perfil: Perfil) => {
+  create = (nuevoPerfil: Perfil) => {
+
     //metodo crear nuevo perfil
+    const usernameHashed = Hasher.hashString(nuevoPerfil.username);
+    let posibleUser: Perfil;
+
+    try {
+
+      posibleUser = this.avlUsuarios.findData(usernameHashed);
+      if (posibleUser != undefined) alert("Este nombre de usuario ya existe, por favor elige otro");
+      return;
+
+    } catch (error) {
+
+      if (nuevoPerfil.password !== nuevoPerfil.confirm_password) {
+
+        alert("La contraseña confirmada no es igual, por favor verifica e intenta de nuevo.");
+        return;
+
+      }
+
+      this.avlUsuarios.insert(nuevoPerfil, usernameHashed);
+      alert("El usuario fue creado de forma exitosa.");
+      return;
+
+    }
+
   };
 
   setActive = (input: string, objeto: any) => {
