@@ -97,58 +97,21 @@ function crearMiniEvento( name: string,distancia: number,address: string,time_be
 //console.log(heapMiniEventos.informacion());
 
 //-------------------------------------------Usuarios-------------------------------------------------------
-class Usuario {
-    private name: string;
-    private age: number;
-    private address: string;
-    private dob: Date;
 
-    constructor (name: string, age: number, address: string, dob: Date, id: number){
-        this.name = name;
-        this.age = age;
-        this.address = address;
-        this.dob = dob;
-    }
-
-    setName(newName: string) {
-        this.name = newName;
-    }
-    getName(): string{
-        return this.name;
-    }
-
-    setAge(newAge: number) {
-        this.age = newAge;
-    }
-    getAge(): number{
-        return this.age;
-    }
-
-    setAddress(newAddress: string) {
-        this.address = newAddress;
-    }
-    getId(): string{
-        return this.address;
-    }
-
-    setDob(newDob: Date) {
-        this.dob = newDob;
-    }
-    getDob(): Date{
-        return this.dob;
-    }
-}
-
-class Perfil{
+class Usuario{
     private name: string;
     private lastname: string;
     private email: string;
     private username: string;
     private password: string;
+    private  age: number;
+    private address : string;
 
-    constructor (name: string, lastname: string, email: string, username: string, password: string){
+    constructor (name: string, lastname: string,  age: number, address: string, email: string, username: string, password: string){
         this.name = name;
         this.lastname = lastname;
+        this.age = age;
+        this.address = address;
         this.email = email;
         this.username = username;
         this.password = password;
@@ -167,6 +130,20 @@ class Perfil{
     getLastName(): string{
         return this.lastname;
     }
+
+    setAge(newAge: number) {
+        this.age = newAge;
+    }
+    getAge(): number{
+        return this.age;
+    }
+
+    setAddress(newAddress: string) {
+        this.address = newAddress;
+    }
+    getId(): string{
+        return this.address;
+    }
     
     setEmail(newEmail: string) {
         this.name = newEmail;
@@ -182,8 +159,47 @@ class Perfil{
         return this.username;
     }
 
+    setPassword(newPassword: string) {
+        this.password = newPassword;
+    }
+    getPassword(): string{
+        return this.password;
+    }
+
 
 
 }
 
+const usuarioBase = new Usuario("","", 0,"","","","")
+const arbolUsuarios = new AvlBst<Usuario>(usuarioBase, 0);
+const arbolContrasenas = new AvlBst(null, 0);
 
+//Aun hay varias cosas que estoy corrigiendo :3
+
+function verificarLogin(arbolUsuarios : AvlBst<Usuario>,arbolContrasenas : AvlBst<string>,contraseña : string , Usuario: string ){
+    int idUsuario = arbolUsuarios.findId(Usuario); //falta crear funcion en avl
+    string contrasenaEnArbol = arbolContrasenas.findData(idUsuario);
+    if (contraseña == contrasenaEnArbol){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+function crearUsuario(name: string, lastname: string,  age: number, address: string, email: string, username: string, password: string){
+    let i = 0;
+    while (i < arbolUsuarios.numElements){
+        if (name != arbolUsuarios.findData(i).getUsername){  //error
+            let  usuario = new Usuario(name,lastname,age,address,email,username,password);
+            arbolUsuarios.insert(usuario);  //falta id
+            arbolContrasenas.insert(password); // falta id
+
+        }else{
+            console.log("El nombre de usuario esta repetido");
+        }
+    }
+}
+
+
+//falta pasar de una ventana a otra (?
