@@ -9,10 +9,11 @@ interface Props {
   create_ev: (evento: Evento) => void;
 }
 
-export default class Ventana_cev extends React.Component<Props, {}> {
+export default class Ventana_cev extends React.Component<Props, Evento> {
 
   constructor(props: Props) {
     super(props);
+    this.state = this.evento
   }
 
   evento: Evento = {
@@ -25,19 +26,19 @@ export default class Ventana_cev extends React.Component<Props, {}> {
   };
 
   changeName = (e: ChangeEvent) => {
-    this.evento.name = (e.target as HTMLInputElement).value;
+    this.setState({name : (e.target as HTMLInputElement).value});
   };
 
   changeAddress = (e: ChangeEvent) => {
-    this.evento.address = (e.target as HTMLInputElement).value;
+    this.setState({address : (e.target as HTMLInputElement).value});
   };
 
   changeTimeBegin = (e: ChangeEvent) => {
-    this.evento.time_begin = new Date((e.target as HTMLInputElement).value);
+    this.setState({time_begin : new Date((e.target as HTMLInputElement).value)});
   };
 
   changeTimeEnd = (e: ChangeEvent) => {
-    this.evento.time_end = new Date((e.target as HTMLInputElement).value);
+    this.setState({time_end : new Date((e.target as HTMLInputElement).value)});
   };
 
   changeDeporte = (e: ChangeEvent) => {

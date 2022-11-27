@@ -96,11 +96,13 @@ export default class App extends React.Component<{}, State> {
 
   create_ev = (evento: Evento) => {
     //codigo que crea un evento verificando tambien si existe o no y si se repite nombre
+    console.log(evento)
     this.setActive("BUSQUEDA", "");
   };
 
   delete_ev = (evento: Evento) => {
     //Codigo para eleiminar un evento teniendo el evento completo con sus atributos
+    
   };
 
   setEvent = (evento: Evento) => {
