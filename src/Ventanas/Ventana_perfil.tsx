@@ -8,7 +8,7 @@ import Evento from "../Interface/InterfaceEvento";
 
 interface Props {
   perfil: Perfil;
-  edit: (perfil: Perfil) => void;
+  edit: (perfil: Perfil, username:string) => void;
   setActive: (input: string, retorno: any) => void;
   delete: (evento:Evento) => void;
   arrayEvento: Evento[];
@@ -21,9 +21,9 @@ export default class Ventana_perfil extends React.Component<Props, Perfil> {
   }
 
   edit = () => {
-    this.props.edit(this.state);
+    this.props.edit(this.state,this.props.perfil.username);
     //imprime solo para verificar si se modifica
-    console.log(this.state);
+    // console.log(this.state);
   };
 
   changeName = (e: ChangeEvent) => {

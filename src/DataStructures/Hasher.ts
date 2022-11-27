@@ -1,4 +1,4 @@
-export class Hasher {
+export default class Hasher {
 
     private static defCardinality = 100000000;
     private static defPrimeNum = 104395303;

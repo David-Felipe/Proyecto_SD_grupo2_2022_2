@@ -8,6 +8,8 @@ import Ventana_inicio from "./Ventanas/Ventana_inicio";
 import Perfil from "./Interface/InterfacePerfil";
 import Heap from "./DataStructures/Heap";
 import Evento from "./Interface/InterfaceEvento";
+import Hasher from "./DataStructures/Hasher";
+import {AvlBst} from "./DataStructures/AvlBst";
 
 interface State {
   perfil_atributo: Perfil;
@@ -15,10 +17,7 @@ interface State {
   showError: boolean;
 }
 
-export default class App extends React.Component<{}, State> {
-  retorno: any = "hola";
-  heapMiniEventos = new Heap(1000);
-
+export default class App extends React.Component<{}, State> {  
   constructor(props: {}) {
     super(props);
     this.state = {
@@ -34,22 +33,23 @@ export default class App extends React.Component<{}, State> {
       active: "INICIO",
       showError: false
     };
+  
   }
-
+  
   changeShowError = (condition: boolean) => {
     this.setState({ showError: condition });
   };
-
+  
   autentication = (name: string, password: string) => {
     //authenticacion y retorna
     //true ---> si lo encontro y tiene contraseña valida y hace
     this.setActive("BUSQUEDA", "");
     //false ---> contraseña incorrecta mostrar un alert("Contraseña incorrecta")
     //false ---> no encontro usuario y hacer
-                                        //  this.changeShowError(true);
+    //  this.changeShowError(true);
     //retorna true solo para pruebas
   };
-
+  
   //Elementos para prueba
   evento: Evento = {
     name: "PARTIDO",
@@ -59,7 +59,21 @@ export default class App extends React.Component<{}, State> {
     time_end: new Date(),
     thematics: [true,false,false,true,false,false],
   };
+  
+  //Perfil de prueba para inicializar el avl
+  perfil_test: Perfil = {
+    name: "Juan",
+    lastname: "Carreño",
+    username: "jcarrenoar",
+    password: "12345",
+    confirm_password: "******",
+  }
 
+  retorno: any = "hola";
+  heapMiniEventos:Heap<Evento> = new Heap(1000);
+  Hasher = new Hasher();
+  avlUsuarios:AvlBst<Perfil> = new AvlBst(this.perfil_test,Hasher.hashString(this.perfil_test.username));
+  
   //Se necesita una funcion que tome los minieventos y los guarde en un arreglo de Evento[]
   guardar = () => {
     //codigo para volverlos en una arreglo de Eventos llamado arrayEvento
@@ -95,9 +109,15 @@ export default class App extends React.Component<{}, State> {
     this.setActive("PERFIL", "");
   };
 
-  setPerfil = (perfil: Perfil) => {
+  setPerfil = (perfil: Perfil, username:string) => {
     //Aqui va el codigo para editar un perfil y la entrada de este metodo
     //es un perfil con todos sus atributos
+    //Esta funcion borra el perfil anterior e inserta uno nuevo con la modificaciones esto así para
+    var valor_hash = Hasher.hashString(username);
+    console.log(valor_hash)
+    console.log(this.avlUsuarios.breadthFirstTraverse())
+    this.avlUsuarios.delete(valor_hash);
+    this.avlUsuarios.insert(perfil,Hasher.hashString(perfil.username))
   };
   
   create = (nuevo_perfil: Perfil) => {
