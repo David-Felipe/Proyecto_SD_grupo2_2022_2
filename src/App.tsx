@@ -58,6 +58,9 @@ export default class App extends React.Component<{}, State> {
     time_begin: new Date(),
     time_end: new Date(),
     thematics: [true,false,false,true,false,false],
+    
+   
+
   };
   
   //Perfil de prueba para inicializar el avl
@@ -82,16 +85,68 @@ export default class App extends React.Component<{}, State> {
   //Elementos para prueba
   arrayEvento: Evento[] = [
     this.evento,
-    this.evento,
-    this.evento,
-    this.evento,
-    this.evento,
-    this.evento,
-    this.evento,
-    this.evento,
-    this.evento,
-    this.evento,
-    this.evento,
+    {name: "DEPORTE",
+    distancia: 7, 
+    address: "CRA zxw",
+    time_begin: new Date(2022, 11, 4, 19, 23, 42, 11),
+    time_end: new Date(2022, 11, 4, 20, 23, 42, 11),
+    thematics: [true,false,false,true,false,false]},
+    
+    {name: "LECTURA",
+    distancia: 12, 
+    address: "CALLE bog",
+    time_begin:  new Date(2021, 4, 4, 13, 23, 42, 11),
+    time_end: new Date(2021, 4, 4, 16, 23, 42, 11),
+    thematics: [false,false,true,true,true,false]},
+  
+    {name: "JUEGOS",
+    distancia: 6,
+    address: "AV 68a",
+    time_begin:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    time_end:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    thematics: [false,true,true,true,false,false]},
+
+    {name: "SOCIALIZAR",
+    distancia: 9,
+    address: "AV AMERICAS",
+    time_begin:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    time_end:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    thematics: [false,true,true,true,false,false]},
+
+    {name: "Otros",
+    distancia: 13,
+    address: "AUTOPISTA SUR",
+    time_begin:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    time_end:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    thematics: [false,true,true,true,false,true]},
+
+  {name: "JUEGOS",
+    distancia: 7,
+    address: "CALLE xyd",
+    time_begin:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    time_end:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    thematics: [true,false,true,true,false,false]},
+
+    {name: "MUSICA",
+    distancia: 4,
+    address: "CRA mgm",
+    time_begin:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    time_end:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    thematics: [false,true,true,true,false,false]},
+
+    {name: "SOCIALIZAR",
+    distancia: 8,
+    address: "AV ROJAS",
+    time_begin:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    time_end:  new Date(2022, 4, 4, 17, 23, 42, 11),
+    thematics: [false,true,true,true,false,false]},
+
+    {name: "LECTURA",
+    distancia: 1,
+    address: "CALLE 26",
+    time_begin:  new Date(2022, 11, 3, 17, 23, 42, 11),
+    time_end: new Date(2022, 11, 3, 17, 23, 42, 11),
+    thematics: [false,false,true,true,true,false]},
   ];
 
   create_ev = (evento: Evento) => {
