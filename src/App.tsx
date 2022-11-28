@@ -137,10 +137,8 @@ export default class App extends React.Component<{}, State> {
 
   create_ev = (new_evento: Evento) => {
     //codigo que crea un evento verificando tambien si existe o no y si se repite nombre
-    console.log(new_evento)
     const usernameHashed = Hasher.hashString(new_evento.name);
     new_evento.distancia = this.getRandomInt(1,1000);
-    console.log(usernameHashed)
     let posibleUser: Evento;
 
     try {
@@ -199,8 +197,6 @@ export default class App extends React.Component<{}, State> {
     //es un perfil con todos sus atributos
     //Esta funcion borra el perfil anterior e inserta uno nuevo con la modificaciones esto así para
     const valor_hash = Hasher.hashString(username);
-    console.log(valor_hash)
-    console.log(this.avlUsuarios.breadthFirstTraverse())
     this.avlUsuarios.delete(valor_hash);
     this.avlUsuarios.insert(perfil, Hasher.hashString(perfil.username))
   };
