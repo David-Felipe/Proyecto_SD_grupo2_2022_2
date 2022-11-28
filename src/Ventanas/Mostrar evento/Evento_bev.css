@@ -12,8 +12,8 @@
 }
 
 .km {
-  position: relative;
-  left: 200px;
+  position: absolute;
+  left: 350px;
 }
 
 .begin {

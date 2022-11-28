@@ -10,6 +10,7 @@ import Heap from "./DataStructures/Heap";
 import Evento from "./Interface/InterfaceEvento";
 import Hasher from "./DataStructures/Hasher";
 import { AvlBst } from "./DataStructures/AvlBst";
+import { LinkedList } from "DataStructures/LinkedList";
 
 interface State {
   perfil_atributo: Perfil;
@@ -99,106 +100,25 @@ export default class App extends React.Component<{}, State> {
   heapMiniEventos: Heap<Evento> = new Heap(1000);
   Hasher = new Hasher();
   avlUsuarios: AvlBst<Perfil> = new AvlBst(this.perfil_test, Hasher.hashString(this.perfil_test.username));
+  avlEventos: AvlBst<Evento> = new AvlBst(this.evento, Hasher.hashString(this.evento.name));
 
   //Se necesita una funcion que tome los minieventos y los guarde en un arreglo de Evento[]
-  guardar = () => {
-    //codigo para volverlos en una arreglo de Eventos llamado arrayEvento
-  };
 
   //Elementos para prueba
-  arrayEvento: Evento[] = [
-    this.evento,
-    {
-      name: "DEPORTE",
-      distancia: 2,
-      address: "CRA zxw",
-      time_begin: new Date(2022, 11, 4, 19, 23, 42, 11),
-      time_end: new Date(2022, 11, 4, 20, 23, 42, 11),
-      thematics: [true, false, false, true, false, false]
-    },
+  arrayEvento: Evento[] = [];
 
-    {
-      name: "LECTURA",
-      distancia: 12,
-      address: "CALLE bog",
-      time_begin: new Date(2021, 4, 4, 13, 23, 42, 11),
-      time_end: new Date(2021, 4, 4, 16, 23, 42, 11),
-      thematics: [false, false, true, true, true, false]
-    },
-
-    {
-      name: "JUEGOS",
-      distancia: 6,
-      address: "AV 68a",
-      time_begin: new Date(2022, 4, 4, 17, 23, 42, 11),
-      time_end: new Date(2022, 4, 4, 17, 23, 42, 11),
-      thematics: [false, true, true, true, false, false]
-    },
-
-    {
-      name: "SOCIALIZAR",
-      distancia: 9,
-      address: "AV AMERICAS",
-      time_begin: new Date(2022, 4, 4, 17, 23, 42, 11),
-      time_end: new Date(2022, 4, 4, 17, 23, 42, 11),
-      thematics: [false, true, true, true, false, false]
-    },
-
-    {
-      name: "Otros",
-      distancia: 13,
-      address: "AUTOPISTA SUR",
-      time_begin: new Date(2022, 4, 4, 17, 23, 42, 11),
-      time_end: new Date(2022, 4, 4, 17, 23, 42, 11),
-      thematics: [false, true, true, true, false, true]
-    },
-
-    {
-      name: "JUEGOS",
-      distancia: 7,
-      address: "CALLE xyd",
-      time_begin: new Date(2022, 4, 4, 17, 23, 42, 11),
-      time_end: new Date(2022, 4, 4, 17, 23, 42, 11),
-      thematics: [true, false, true, true, false, false]
-    },
-
-    {
-      name: "MUSICA",
-      distancia: 4,
-      address: "CRA mgm",
-      time_begin: new Date(2022, 4, 4, 17, 23, 42, 11),
-      time_end: new Date(2022, 4, 4, 17, 23, 42, 11),
-      thematics: [false, true, true, true, false, false]
-    },
-
-    {
-      name: "SOCIALIZAR",
-      distancia: 8,
-      address: "AV ROJAS",
-      time_begin: new Date(2022, 4, 4, 17, 23, 42, 11),
-      time_end: new Date(2022, 4, 4, 17, 23, 42, 11),
-      thematics: [false, true, true, true, false, false]
-    },
-
-    {
-      name: "LECTURA",
-      distancia: 1,
-      address: "CALLE 26",
-      time_begin: new Date(2022, 11, 3, 17, 23, 42, 11),
-      time_end: new Date(2022, 11, 3, 17, 23, 42, 11),
-      thematics: [false, false, true, true, true, false]
-    },
-  ];
   getRandomInt(min: number, max: number) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
   }
+  
   calc_distancia(distancia1: number,distancia2: number){
     //esta funcion deberia calcular la distancia entre ambos puntos, sin embargo, por problemas de la api se tomara un valor aleatorio por ahora.
     const valor=distancia1-distancia2
     return this.getRandomInt(1,1000)
   }
+
   organizarminieventos(listademinieventos: Evento[]){
     //la primera parte del codigo saca todos los minieventos y los inserta a una lista
     const posicionactual=0
@@ -210,25 +130,67 @@ export default class App extends React.Component<{}, State> {
     }
     for (let i = 0; i < listademinieventos.length; i++) {
         const valor = pilaorganizadora.extractmax()[1]
-        listademinieventos[i]=valor
+        listademinieventos[i]=valor;
       }
     return listademinieventos
   }
 
-  create_ev = (evento: Evento) => {
+  create_ev = (new_evento: Evento) => {
     //codigo que crea un evento verificando tambien si existe o no y si se repite nombre
-    console.log(evento)
-    this.setActive("BUSQUEDA", "");
+    console.log(new_evento)
+    const usernameHashed = Hasher.hashString(new_evento.name);
+    new_evento.distancia = this.getRandomInt(1,1000);
+    console.log(usernameHashed)
+    let posibleUser: Evento;
+
+    try {
+      posibleUser = this.avlEventos.findData(usernameHashed);
+      
+      posibleUser = this.avlEventos.findData(usernameHashed);
+      if (posibleUser != undefined) {alert("Este nombre de evento ya existe, por favor elige otro")};
+      return;
+
+    } catch (error) {
+      this.avlEventos.insert(new_evento, usernameHashed);
+      this.arrayEvento = this.arrayEvento.concat(new_evento);
+      this.setActive("BUSQUEDA", "");
+      alert("El evento fue creado de forma exitosa.");
+      return;
+
+    }
+
   };
 
   delete_ev = (evento: Evento) => {
     //Codigo para eleiminar un evento teniendo el evento completo con sus atributos
+    const nameHashed = Hasher.hashString(evento.name);
+    let posibleUser: Evento;
 
+    try {
+      posibleUser = this.avlEventos.delete(nameHashed);
+      
+      var index = this.arrayEvento.indexOf(evento);
+      this.arrayEvento.splice(index,1);
+      alert("Este evento fue eliminado con exito");
+      this.setActive("PERFIL","")      
+      return;
+
+    } catch (error) {
+      alert("El evento no existe.o eso dice");
+      return;
+
+    } 
   };
 
-  setEvent = (evento: Evento) => {
+  setEvent = (evento: Evento, name:string) => {
     //Aqui va el codigo que edita un evento recibiendo el mismo evento editado
-    console.log(evento.name);
+    const valor_hash = Hasher.hashString(name);
+    this.avlEventos.delete(valor_hash);
+    var index = this.arrayEvento.indexOf(evento);
+    this.arrayEvento.splice(index,1);
+    this.avlEventos.insert(evento, Hasher.hashString(evento.name))
+    this.arrayEvento = this.arrayEvento.concat(evento);
+
     this.setActive("PERFIL", "");
   };
 

@@ -44,7 +44,7 @@ export default class Evento_comp extends React.Component<Props, {}> {
           <label className="distancia_evento">
             {this.props.evento.distancia}
           </label>
-          <label className="km"> km</label>
+          <label className="km"> m</label>
           <br></br>
           <label>ADDRESS: </label>
           <label className="address_evento">{this.props.evento.address}</label>

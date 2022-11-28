@@ -8,7 +8,7 @@ import Evento from "../Interface/InterfaceEvento";
 interface Props {
   setActive: (input: string, retorno: any) => void;
   evento: Evento;
-  edit: (evento: Evento) => void;
+  edit: (evento: Evento, name:string) => void;
 }
 
 
@@ -61,25 +61,25 @@ export default class Ventana_dev extends React.Component<Props, Evento> {
 
   changeDeporte = (e: ChangeEvent) => {
     var current_thems: boolean[] = this.state.thematics;
-    current_thems[0] = !((e.target as HTMLInputElement).checked);
+    current_thems[0] = ((e.target as HTMLInputElement).checked);
     this.setState({ thematics: current_thems });
   };
 
   changeSocializar = (e: ChangeEvent) => {
     var current_thems: boolean[] = this.state.thematics;
-    current_thems[1] = !(e.target as HTMLInputElement).checked;
+    current_thems[1] = (e.target as HTMLInputElement).checked;
     this.setState({ thematics: current_thems });
   };
 
   changeLectura = (e: ChangeEvent) => {
     var current_thems: boolean[] = this.state.thematics;
-    current_thems[2] = !(e.target as HTMLInputElement).checked;
+    current_thems[2] = (e.target as HTMLInputElement).checked;
     this.setState({ thematics: current_thems });
   };
 
   changeMusica = (e: ChangeEvent) => {
     var current_thems: boolean[] = this.state.thematics;
-    current_thems[3] = !(e.target as HTMLInputElement).checked;
+    current_thems[3] = (e.target as HTMLInputElement).checked;
     this.setState({ thematics: current_thems });
   };
 
@@ -91,7 +91,7 @@ export default class Ventana_dev extends React.Component<Props, Evento> {
 
   changeOtros = (e: ChangeEvent) => {
     var current_thems: boolean[] = this.state.thematics;
-    current_thems[5] = !(e.target as HTMLInputElement).checked;
+    current_thems[5] = (e.target as HTMLInputElement).checked;
     this.setState({ thematics: current_thems });
   };
 
@@ -230,7 +230,7 @@ export default class Ventana_dev extends React.Component<Props, Evento> {
                 className="button_create"
                 type="button"
                 id="button_create"
-                onClick={() => this.props.edit(this.state)}
+                onClick={() => this.props.edit(this.state,this.props.evento.name)}
               >
                 EDIT
               </button>

@@ -10,10 +10,9 @@ interface Props {
 }
 
 export default class Ventana_cev extends React.Component<Props, Evento> {
-
   constructor(props: Props) {
     super(props);
-    this.state = this.evento
+    this.state = this.evento;
   }
 
   evento: Evento = {
@@ -22,58 +21,60 @@ export default class Ventana_cev extends React.Component<Props, Evento> {
     address: "CAllE xxx",
     time_begin: new Date(2012, 1, 31, 23, 59, 59),
     time_end: new Date(2012, 1, 31, 23, 59, 59),
-    thematics: [false,false,false,false,false,false],
+    thematics: [false, false, false, false, false, false],
   };
 
   changeName = (e: ChangeEvent) => {
-    this.setState({name : (e.target as HTMLInputElement).value});
+    this.setState({ name: (e.target as HTMLInputElement).value });
   };
 
   changeAddress = (e: ChangeEvent) => {
-    this.setState({address : (e.target as HTMLInputElement).value});
+    this.setState({ address: (e.target as HTMLInputElement).value });
   };
 
   changeTimeBegin = (e: ChangeEvent) => {
-    this.setState({time_begin : new Date((e.target as HTMLInputElement).value)});
+    this.setState({
+      time_begin: new Date((e.target as HTMLInputElement).value),
+    });
   };
 
   changeTimeEnd = (e: ChangeEvent) => {
-    this.setState({time_end : new Date((e.target as HTMLInputElement).value)});
+    this.setState({ time_end: new Date((e.target as HTMLInputElement).value) });
   };
 
   changeDeporte = (e: ChangeEvent) => {
-    var current_thems: boolean[] = this.evento.thematics;
-    current_thems[0] = !(e.target as HTMLInputElement).checked;
+    var current_thems: boolean[] = this.state.thematics;
+    current_thems[0] = (e.target as HTMLInputElement).checked;
     this.setState({ thematics: current_thems });
   };
 
   changeSocializar = (e: ChangeEvent) => {
-    var current_thems: boolean[] = this.evento.thematics;
-    current_thems[1] = !(e.target as HTMLInputElement).checked;
+    var current_thems: boolean[] = this.state.thematics;
+    current_thems[1] = (e.target as HTMLInputElement).checked;
     this.setState({ thematics: current_thems });
   };
 
   changeLectura = (e: ChangeEvent) => {
-    var current_thems: boolean[] = this.evento.thematics;
-    current_thems[2] = !(e.target as HTMLInputElement).checked;
+    var current_thems: boolean[] = this.state.thematics;
+    current_thems[2] = (e.target as HTMLInputElement).checked;
     this.setState({ thematics: current_thems });
   };
 
   changeMusica = (e: ChangeEvent) => {
-    var current_thems: boolean[] = this.evento.thematics;
-    current_thems[3] = !(e.target as HTMLInputElement).checked;
+    var current_thems: boolean[] = this.state.thematics;
+    current_thems[3] = (e.target as HTMLInputElement).checked;
     this.setState({ thematics: current_thems });
   };
 
   changeJuegos = (e: ChangeEvent) => {
-    var current_thems: boolean[] = this.evento.thematics;
-    current_thems[4] = !(e.target as HTMLInputElement).checked;
+    var current_thems: boolean[] = this.state.thematics;
+    current_thems[4] = (e.target as HTMLInputElement).checked;
     this.setState({ thematics: current_thems });
   };
 
   changeOtros = (e: ChangeEvent) => {
-    var current_thems: boolean[] = this.evento.thematics;
-    current_thems[5] = !(e.target as HTMLInputElement).checked;
+    var current_thems: boolean[] = this.state.thematics;
+    current_thems[5] = (e.target as HTMLInputElement).checked;
     this.setState({ thematics: current_thems });
   };
 
@@ -156,19 +157,49 @@ export default class Ventana_cev extends React.Component<Props, Evento> {
                     </label>
                   </div>
                   <div className="CheckBoxs">
-                    <input type="checkbox" name="deporte" value="1" />
+                    <input
+                      type="checkbox"
+                      name="deporte"
+                      value="1"
+                      onChange={this.changeDeporte}
+                    />
                     DEPORTE <br />
-                    <input type="checkbox" name="socializar" value="3" />
+                    <input
+                      type="checkbox"
+                      name="socializar"
+                      value="3"
+                      onChange={this.changeSocializar}
+                    />
                     SOCIALIZAR <br />
-                    <input type="checkbox" name="lectura" value="5" />
+                    <input
+                      type="checkbox"
+                      name="lectura"
+                      value="5"
+                      onChange={this.changeLectura}
+                    />
                     LECTURA <br />
                   </div>
                   <div className="CheckBoxs2">
-                    <input type="checkbox" name="musica" value="2" />
+                    <input
+                      type="checkbox"
+                      name="musica"
+                      value="2"
+                      onChange={this.changeMusica}
+                    />
                     MUSICA <br />
-                    <input type="checkbox" name="juegos" value="4" />
+                    <input
+                      type="checkbox"
+                      name="juegos"
+                      value="4"
+                      onChange={this.changeJuegos}
+                    />
                     JUEGOS <br />
-                    <input type="checkbox" name="Otros" value="6" />
+                    <input
+                      type="checkbox"
+                      name="Otros"
+                      value="6"
+                      onChange={this.changeOtros}
+                    />
                     Otros <br />
                   </div>
                   <br></br>
