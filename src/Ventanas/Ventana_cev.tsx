@@ -177,7 +177,7 @@ export default class Ventana_cev extends React.Component<Props, Evento> {
                   className="button_create"
                   type="button"
                   id="button_create"
-                  onClick={() => this.props.create_ev(this.evento)}
+                  onClick={() => this.props.create_ev(this.state)}
                 >
                   CREATE
                 </button>

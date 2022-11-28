@@ -99,6 +99,7 @@ export default class App extends React.Component<{}, State> {
   heapMiniEventos: Heap<Evento> = new Heap(1000);
   Hasher = new Hasher();
   avlUsuarios: AvlBst<Perfil> = new AvlBst(this.perfil_test, Hasher.hashString(this.perfil_test.username));
+  avlEventos: AvlBst<Evento> = new AvlBst(this.evento, Hasher.hashString(this.evento.name));
 
   //Se necesita una funcion que tome los minieventos y los guarde en un arreglo de Evento[]
   guardar = () => {
@@ -190,10 +191,27 @@ export default class App extends React.Component<{}, State> {
     },
   ];
 
-  create_ev = (evento: Evento) => {
+  create_ev = (new_evento: Evento) => {
     //codigo que crea un evento verificando tambien si existe o no y si se repite nombre
-    console.log(evento)
-    this.setActive("BUSQUEDA", "");
+    console.log(new_evento)
+    const usernameHashed = Hasher.hashString(new_evento.name);
+    console.log(usernameHashed)
+    let posibleUser: Evento;
+
+    try {
+      posibleUser = this.avlEventos.findData(usernameHashed);
+      
+      posibleUser = this.avlEventos.findData(usernameHashed);
+      if (posibleUser != undefined) {alert("Este nombre de usuario ya existe, por favor elige otro")};
+      return;
+
+    } catch (error) {
+      this.avlEventos.insert(new_evento, usernameHashed);
+      this.setActive("BUSQUEDA", "");
+      alert("El usuario fue creado de forma exitosa.");
+      return;
+
+    }
   };
 
   delete_ev = (evento: Evento) => {

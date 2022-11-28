@@ -15,8 +15,8 @@ export default class Ventana_registro extends React.Component<Props, Perfil> {
   }
 
   create = (input:string) => {
-    this.props.setActive(input,"")
     this.props.create(this.state);
+    this.props.setActive(input,"")
     console.log(this.state);
     // codigo para editar y cambiar de ventana juntas las funciones
   };
