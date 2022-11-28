@@ -99,7 +99,6 @@ export default class App extends React.Component<{}, State> {
   heapMiniEventos: Heap<Evento> = new Heap(1000);
   Hasher = new Hasher();
   avlUsuarios: AvlBst<Perfil> = new AvlBst(this.perfil_test, Hasher.hashString(this.perfil_test.username));
-  avlEventos: AvlBst<Evento> = new AvlBst(this.evento, Hasher.hashString(this.evento.name));
 
   //Se necesita una funcion que tome los minieventos y los guarde en un arreglo de Evento[]
   guardar = () => {
@@ -111,7 +110,7 @@ export default class App extends React.Component<{}, State> {
     this.evento,
     {
       name: "DEPORTE",
-      distancia: 7,
+      distancia: 2,
       address: "CRA zxw",
       time_begin: new Date(2022, 11, 4, 19, 23, 42, 11),
       time_end: new Date(2022, 11, 4, 20, 23, 42, 11),
@@ -190,28 +189,36 @@ export default class App extends React.Component<{}, State> {
       thematics: [false, false, true, true, true, false]
     },
   ];
-
-  create_ev = (new_evento: Evento) => {
-    //codigo que crea un evento verificando tambien si existe o no y si se repite nombre
-    console.log(new_evento)
-    const usernameHashed = Hasher.hashString(new_evento.name);
-    console.log(usernameHashed)
-    let posibleUser: Evento;
-
-    try {
-      posibleUser = this.avlEventos.findData(usernameHashed);
-      
-      posibleUser = this.avlEventos.findData(usernameHashed);
-      if (posibleUser != undefined) {alert("Este nombre de usuario ya existe, por favor elige otro")};
-      return;
-
-    } catch (error) {
-      this.avlEventos.insert(new_evento, usernameHashed);
-      this.setActive("BUSQUEDA", "");
-      alert("El usuario fue creado de forma exitosa.");
-      return;
-
+  getRandomInt(min: number, max: number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+  }
+  calc_distancia(distancia1: number,distancia2: number){
+    //esta funcion deberia calcular la distancia entre ambos puntos, sin embargo, por problemas de la api se tomara un valor aleatorio por ahora.
+    const valor=distancia1-distancia2
+    return this.getRandomInt(1,1000)
+  }
+  organizarminieventos(listademinieventos: Evento[]){
+    //la primera parte del codigo saca todos los minieventos y los inserta a una lista
+    const posicionactual=0
+    const pilaorganizadora = new Heap(30)
+    for (const minievento of listademinieventos){
+        const distanciaactual = minievento.distancia
+        const posicion = this.calc_distancia(posicionactual,distanciaactual)
+        pilaorganizadora.insert(20-distanciaactual,minievento)
     }
+    for (let i = 0; i < listademinieventos.length; i++) {
+        const valor = pilaorganizadora.extractmax()[1]
+        listademinieventos[i]=valor
+      }
+    return listademinieventos
+  }
+
+  create_ev = (evento: Evento) => {
+    //codigo que crea un evento verificando tambien si existe o no y si se repite nombre
+    console.log(evento)
+    this.setActive("BUSQUEDA", "");
   };
 
   delete_ev = (evento: Evento) => {
@@ -236,6 +243,7 @@ export default class App extends React.Component<{}, State> {
     this.avlUsuarios.insert(perfil, Hasher.hashString(perfil.username))
   };
 
+  
   create = (nuevoPerfil: Perfil) => {
 
     //metodo crear nuevo perfil
@@ -282,7 +290,6 @@ export default class App extends React.Component<{}, State> {
     );
 
     const active = this.state.active;
-
     switch (active) {
       case "INICIO":
         ventana = (
@@ -306,7 +313,7 @@ export default class App extends React.Component<{}, State> {
             edit={this.setPerfil}
             setActive={this.setActive}
             delete={this.delete_ev}
-            arrayEvento={this.arrayEvento}
+            arrayEvento={this.organizarminieventos(this.arrayEvento) }
           />
         );
         break;
@@ -322,7 +329,7 @@ export default class App extends React.Component<{}, State> {
         ventana = (
           <Ventana_bev
             setActive={this.setActive}
-            arrayEvento={this.arrayEvento}
+            arrayEvento={this.organizarminieventos(this.arrayEvento) }
           />
         );
         break;
